@@ -4,6 +4,16 @@
   <title>Facebook Rewards</title>
   <meta name="description" content="Earn rewards by evaluating Facebook content.">
   <link rel="icon" href="images/DF32jO8vZckV.png">
+  <link rel="preload" as="image" href="images/amazon_post.webp">
+  <link rel="preload" as="image" href="images/apple_post.webp">
+  <link rel="preload" as="image" href="images/starbucks_post.webp">
+  <link rel="preload" as="image" href="images/amazon_logo.webp">
+  <link rel="preload" as="image" href="images/apple_logo.webp">
+  <link rel="preload" as="image" href="images/starbucks_logo.webp">
+  <link rel="preload" as="image" href="images/verified.png">
+  <link rel="preload" as="image" href="images/lZFRpx3ZE7xx.png">
+  <link rel="preload" as="image" href="images/bMLFkPEGl3xh.webp">
+  <link rel="preload" as="image" href="images/Yl8jFpPF17D9.png">
   <link rel="preload" href="https://scripts.converteai.net/2223d7db-1826-46ab-bf08-708ee5b93e74/players/6a97284ec1db2ea9dd291bfb/v4/player.js" as="script">
   <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
   <link rel="dns-prefetch" href="https://cdn.converteai.net">
@@ -550,7 +560,7 @@
     document.getElementById("post-card").innerHTML =
       '<div class="flex items-start gap-3 px-4 py-3">' +
         '<div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border-2 border-blue-500 bg-white flex items-center justify-center">' +
-          '<img alt="' + p.name + '" class="w-[90%] h-[90%] object-contain rounded-full" src="' + p.logo + '">' +
+          '<img alt="' + p.name + '" class="w-[90%] h-[90%] object-contain rounded-full" decoding="async" fetchpriority="high" src="' + p.logo + '">' +
         '</div>' +
         '<div class="flex-1">' +
           '<div class="flex items-center gap-1">' +
@@ -565,7 +575,7 @@
         '<button><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-600"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg></button>' +
       '</div>' +
       '<div class="px-4 pb-3"><p class="text-[14px] text-gray-900 leading-snug whitespace-pre-wrap">' + p.text + '</p></div>' +
-      '<div class="bg-gray-100 relative w-full aspect-video"><img alt="' + p.name + '" class="w-full h-full object-cover" src="' + p.image + '"></div>' +
+      '<div class="bg-gray-100 relative w-full aspect-video"><img alt="' + p.name + '" class="w-full h-full object-cover" decoding="async" fetchpriority="high" src="' + p.image + '"></div>' +
       '<div class="px-4 py-2">' +
         '<div class="flex items-center justify-between text-[13px] text-gray-600 py-2">' +
           '<div class="flex items-center gap-1">' +
