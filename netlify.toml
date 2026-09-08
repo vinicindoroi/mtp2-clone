@@ -1,0 +1,13 @@
+[build]
+  command = "echo 'static site, no build needed'"
+  publish = "public"
+
+[[redirects]]
+  from = "/"
+  to = "/b3/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/b3/index.html"
+  status = 200
