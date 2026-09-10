@@ -51,6 +51,8 @@ const NEXT_STEP_URL = "https://go.centerpag.com/PPU38CQDEP0?upsell=true";
 export function BlackPage({ lang = "en" }: { lang?: Lang }) {
   const t = getUp2Copy(lang).black;
   const [isTt, setIsTt] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     setIsTt(Boolean(getFunnelParams()["ttclid"]));
