@@ -5,6 +5,7 @@ import { withFunnelParams, getFunnelParams } from "@/lib/funnel-params";
 import type { Lang } from "@/lib/reels-i18n";
 import { getUp2Copy } from "@/lib/up2-i18n";
 import { trkStep } from "@/lib/trackly";
+import { chargeUpsell } from "@/lib/upsell-charge";
 import { BlackClarity } from "@/components/BlackClarity";
 import { BlackPixel } from "@/components/BlackPixel";
 
@@ -50,6 +51,8 @@ const NEXT_STEP_URL = "https://go.centerpag.com/PPU38CQDEP0?upsell=true";
 export function BlackPage({ lang = "en" }: { lang?: Lang }) {
   const t = getUp2Copy(lang).black;
   const [isTt, setIsTt] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     setIsTt(Boolean(getFunnelParams()["ttclid"]));
@@ -62,6 +65,24 @@ export function BlackPage({ lang = "en" }: { lang?: Lang }) {
   const goNext = () => {
     markBlackFunnel();
     window.location.href = withFunnelParams(NEXT_STEP_URL, { ur: "1" });
+  };
+
+  const onAccept = async () => {
+    setError("");
+    setLoading(true);
+    markBlackFunnel();
+    const res = await chargeUpsell(2);
+    if (res.ok) return; // worker redireciona
+    if (res.error === "missing_payment_data") {
+      goNext();
+      return;
+    }
+    setError(
+      lang === "es"
+        ? "El pago fue rechazado por el banco. Intenta de nuevo."
+        : "The payment was declined by your bank. Please try again.",
+    );
+    setLoading(false);
   };
 
   return (
@@ -130,13 +151,16 @@ export function BlackPage({ lang = "en" }: { lang?: Lang }) {
 
           <button
             type="button"
-            onClick={goNext}
+            onClick={onAccept}
+            disabled={loading}
             data-funnel-step="checkout"
-            className="up-cta mt-7 flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-(--up-accent) to-(--up-accent-2) py-3.5 text-base font-bold text-white transition-transform active:scale-[0.98]"
+            className="up-cta mt-7 flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-(--up-accent) to-(--up-accent-2) py-3.5 text-base font-bold text-white transition-transform active:scale-[0.98] disabled:opacity-70"
           >
             <Wallet className="h-5 w-5" />
-            {t.cta}
+            {loading ? (lang === "es" ? "Procesando pago..." : "Processing payment...") : t.cta}
           </button>
+          {error ? <p className="mt-2 text-center text-xs text-red-500">{error}</p> : null}
+
 
           <p className="mt-4 text-center text-[11px] text-(--up-faint)">
             {t.secure}

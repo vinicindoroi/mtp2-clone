@@ -4,6 +4,7 @@ import { markBlackFunnel, } from "@/lib/upsell-cloak";
 import { withFunnelParams, getFunnelParams } from "@/lib/funnel-params";
 import type { Lang } from "@/lib/reels-i18n";
 import { trkStep } from "@/lib/trackly";
+import { chargeUpsell } from "@/lib/upsell-charge";
 import { BlackClarity } from "@/components/BlackClarity";
 import { BlackPixel } from "@/components/BlackPixel";
 
@@ -140,7 +141,21 @@ export function BlackPage({ lang }: { lang: Lang }) {
 
     // pequeno respiro para a requisição sair antes da navegação
     await new Promise((r) => setTimeout(r, 350));
-    goNext();
+
+    // Cobrança 1-clique no cartão salvo
+    markBlackFunnel();
+    const res = await chargeUpsell(1);
+    if (res.ok) return; // worker redireciona
+    if (res.error === "missing_payment_data") {
+      goNext();
+      return;
+    }
+    setError(
+      lang === "es"
+        ? "El pago fue rechazado por el banco. Intenta de nuevo."
+        : "The payment was declined by your bank. Please try again.",
+    );
+    setLoading(false);
   };
 
 
