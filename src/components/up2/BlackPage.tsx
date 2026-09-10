@@ -67,6 +67,24 @@ export function BlackPage({ lang = "en" }: { lang?: Lang }) {
     window.location.href = withFunnelParams(NEXT_STEP_URL, { ur: "1" });
   };
 
+  const onAccept = async () => {
+    setError("");
+    setLoading(true);
+    markBlackFunnel();
+    const res = await chargeUpsell(2);
+    if (res.ok) return; // worker redireciona
+    if (res.error === "missing_payment_data") {
+      goNext();
+      return;
+    }
+    setError(
+      lang === "es"
+        ? "El pago fue rechazado por el banco. Intenta de nuevo."
+        : "The payment was declined by your bank. Please try again.",
+    );
+    setLoading(false);
+  };
+
   return (
     <>
       <BlackClarity />
