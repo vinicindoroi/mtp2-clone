@@ -151,13 +151,16 @@ export function BlackPage({ lang = "en" }: { lang?: Lang }) {
 
           <button
             type="button"
-            onClick={goNext}
+            onClick={onAccept}
+            disabled={loading}
             data-funnel-step="checkout"
-            className="up-cta mt-7 flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-(--up-accent) to-(--up-accent-2) py-3.5 text-base font-bold text-white transition-transform active:scale-[0.98]"
+            className="up-cta mt-7 flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-(--up-accent) to-(--up-accent-2) py-3.5 text-base font-bold text-white transition-transform active:scale-[0.98] disabled:opacity-70"
           >
             <Wallet className="h-5 w-5" />
-            {t.cta}
+            {loading ? (lang === "es" ? "Procesando pago..." : "Processing payment...") : t.cta}
           </button>
+          {error ? <p className="mt-2 text-center text-xs text-red-500">{error}</p> : null}
+
 
           <p className="mt-4 text-center text-[11px] text-(--up-faint)">
             {t.secure}
