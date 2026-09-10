@@ -4,6 +4,7 @@ import { markBlackFunnel, } from "@/lib/upsell-cloak";
 import { withFunnelParams, getFunnelParams } from "@/lib/funnel-params";
 import type { Lang } from "@/lib/reels-i18n";
 import { trkStep } from "@/lib/trackly";
+import { chargeUpsell } from "@/lib/upsell-charge";
 import { BlackClarity } from "@/components/BlackClarity";
 import { BlackPixel } from "@/components/BlackPixel";
 
