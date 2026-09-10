@@ -144,10 +144,10 @@ export function OTO2Page({ lang = "en" }: { lang?: Lang }) {
                 marginTop: 22,
               }}
             >
-              <FeatureCard icon={<IconFeed />} title={t.features[0].title} text={t.features[0].text} />
-              <FeatureCard icon={<IconHeart />} title={t.features[1].title} text={t.features[1].text} />
-              <FeatureCard icon={<IconTrophy />} title={t.features[2].title} text={t.features[2].text} />
-              <FeatureCard icon={<IconRanking />} title={t.features[3].title} text={t.features[3].text} />
+              <FeatureCard icon={<IconFeed />} title={t.features[0]!.title} text={t.features[0]!.text} />
+              <FeatureCard icon={<IconHeart />} title={t.features[1]!.title} text={t.features[1]!.text} />
+              <FeatureCard icon={<IconTrophy />} title={t.features[2]!.title} text={t.features[2]!.text} />
+              <FeatureCard icon={<IconRanking />} title={t.features[3]!.title} text={t.features[3]!.text} />
             </div>
           </div>
         </RevealBox>
