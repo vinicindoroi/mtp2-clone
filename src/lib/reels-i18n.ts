@@ -12,7 +12,7 @@ function parseAcceptLanguage(header: string): string | null {
   const first = header.split(",")[0]?.trim() ?? "";
   // e.g. "es-MX" → "MX"; "es" → null (no country)
   const parts = first.split("-");
-  if (parts.length >= 2) return parts[1].toUpperCase();
+  if (parts.length >= 2) return parts[1]!.toUpperCase();
   return null;
 }
 

@@ -72,7 +72,7 @@ export function isRotaA(search: string): boolean {
 export function withFunnelParams(url: string, extra?: Record<string, string>): string {
   if (typeof window === "undefined") return url;
   const params = { ...getFunnelParams(), ...(extra ?? {}) };
-  const [pathPart, hashPart = ""] = url.split("#");
+  const [pathPart = "", hashPart = ""] = url.split("#");
   const [path, existingQuery = ""] = pathPart.split("?");
   const qs = new URLSearchParams(existingQuery);
   Object.entries(params).forEach(([k, v]) => {

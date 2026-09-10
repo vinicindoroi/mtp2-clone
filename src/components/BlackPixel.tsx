@@ -27,7 +27,7 @@ export function BlackPixel() {
       t.async = true;
       t.src = v;
       const s = b.getElementsByTagName(e)[0];
-      s.parentNode?.insertBefore(t, s);
+      s?.parentNode?.insertBefore(t, s);
       n("init", PIXEL_ID);
       n("track", "PageView");
     };

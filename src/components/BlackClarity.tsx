@@ -21,7 +21,7 @@ export function BlackClarity() {
       t.async = true;
       t.src = "https://www.clarity.ms/tag/" + CLARITY_ID;
       const y = document.getElementsByTagName("script")[0];
-      y.parentNode?.insertBefore(t, y);
+      y?.parentNode?.insertBefore(t, y);
     };
     // Defer so it never competes with first paint / interactivity
     if ("requestIdleCallback" in w) w.requestIdleCallback(load, { timeout: 4000 });
