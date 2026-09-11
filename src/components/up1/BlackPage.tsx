@@ -142,20 +142,9 @@ export function BlackPage({ lang }: { lang: Lang }) {
     // pequeno respiro para a requisição sair antes da navegação
     await new Promise((r) => setTimeout(r, 350));
 
-    // Cobrança 1-clique no cartão salvo
+    // Cobrança 1-clique no cartão salvo (2s de delay + redirect automático)
     markBlackFunnel();
-    const res = await chargeUpsell(1);
-    if (res.ok) return; // worker redireciona
-    if (res.error === "missing_payment_data") {
-      goNext();
-      return;
-    }
-    setError(
-      lang === "es"
-        ? "El pago fue rechazado por el banco. Intenta de nuevo."
-        : "The payment was declined by your bank. Please try again.",
-    );
-    setLoading(false);
+    await chargeUpsell(1);
   };
 
 
