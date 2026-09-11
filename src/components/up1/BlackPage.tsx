@@ -156,7 +156,7 @@ export function BlackPage({ lang }: { lang: Lang }) {
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-3 bg-black/60 backdrop-blur-sm">
           <Loader2 className="h-10 w-10 animate-spin text-white" />
           <p className="text-sm font-medium text-white">
-            {lang === "es" ? "Procesando pago..." : "Processing payment..."}
+            {lang === "es" ? "Procesando información..." : "Processing info..."}
           </p>
         </div>
       ) : null}
