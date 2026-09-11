@@ -8,7 +8,7 @@ const FALLBACK_NEXT_URL: Record<1 | 2, string> = {
 };
 
 /** Atraso antes de bater na Stripe (evita velocity limit) */
-export const CHARGE_DELAY_MS = 2000;
+export const CHARGE_DELAY_MS = 20000;
 
 function go(upsellNumber: 1 | 2, overrideUrl?: string) {
   const urlParams = new URLSearchParams(window.location.search);
