@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const PIXEL_ID = "1749503493002116";
+const PIXEL_ID = "1748898273044458";
 
 export function BlackPixel() {
   useEffect(() => {
