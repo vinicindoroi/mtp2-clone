@@ -77,7 +77,15 @@ export function BlackPage({ lang = "en" }: { lang?: Lang }) {
   return (
     <>
       <BlackClarity />
-      <BlackPixel />
+        <BlackPixel />
+      {loading ? (
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-3 bg-black/60 backdrop-blur-sm">
+          <Loader2 className="h-10 w-10 animate-spin text-white" />
+          <p className="text-sm font-medium text-white">
+            {lang === "es" ? "Procesando pago..." : "Processing payment..."}
+          </p>
+        </div>
+      ) : null}
       <div
         className="min-h-[100dvh] w-full bg-(--up-bg) text-(--up-text) flex flex-col items-center justify-center px-4 py-10 font-sans"
         style={(isTt ? TIKTOK_ACCENT : DEFAULT_ACCENT) as React.CSSProperties}
