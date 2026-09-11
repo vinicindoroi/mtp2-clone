@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Wallet, ChevronDown } from "lucide-react";
+import { Wallet, ChevronDown, Loader2 } from "lucide-react";
 import { markBlackFunnel } from "@/lib/upsell-cloak";
 import { withFunnelParams, getFunnelParams } from "@/lib/funnel-params";
 import type { Lang } from "@/lib/reels-i18n";
