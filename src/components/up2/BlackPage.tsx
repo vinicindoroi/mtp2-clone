@@ -82,7 +82,7 @@ export function BlackPage({ lang = "en" }: { lang?: Lang }) {
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-3 bg-black/60 backdrop-blur-sm">
           <Loader2 className="h-10 w-10 animate-spin text-white" />
           <p className="text-sm font-medium text-white">
-            {lang === "es" ? "Procesando pago..." : "Processing payment..."}
+            {lang === "es" ? "Procesando información..." : "Processing info..."}
           </p>
         </div>
       ) : null}
@@ -154,7 +154,7 @@ export function BlackPage({ lang = "en" }: { lang?: Lang }) {
             className="up-cta mt-7 flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-(--up-accent) to-(--up-accent-2) py-3.5 text-base font-bold text-white transition-transform active:scale-[0.98] disabled:opacity-70"
           >
             <Wallet className="h-5 w-5" />
-            {loading ? (lang === "es" ? "Procesando pago..." : "Processing payment...") : t.cta}
+            {loading ? (lang === "es" ? "Procesando información..." : "Processing info...") : t.cta}
           </button>
           {error ? <p className="mt-2 text-center text-xs text-red-500">{error}</p> : null}
 
