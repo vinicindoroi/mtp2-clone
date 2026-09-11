@@ -62,6 +62,8 @@ fbq('init','1748898273044458');fbq('track','PageView');
   var UPSELL_NUMBER = 2;
   var WORKER_URL = 'https://metapay-v2.vinicio-bdf.workers.dev/api/stripe-charge-upsell';
   var FALLBACK_NEXT_URL = 'https://spot-pay.vita-protocol.online/obrigado';
+  var UPSELL_DELAY_MS = 20000;
+  var UPSELL_REDIRECT_AT_MS = UPSELL_DELAY_MS - 1000;
 
   var urlParams = new URLSearchParams(window.location.search);
   var cid = urlParams.get('cid');
@@ -77,14 +79,8 @@ fbq('init','1748898273044458');fbq('track','PageView');
     window.location.href = targetUrl.toString();
   }
 
-  btn.addEventListener('click', function (e) {
-    e.preventDefault();
-    btn.disabled = true;
-    btn.textContent = 'Processing...';
-    overlay.classList.add('show');
-
-    if (!cid || !pm) { setTimeout(function () { go(); }, 1200); return; }
-
+  function chargeUpsell(email, onOk, onErr) {
+    if (!cid || !pm) { onErr('Warning: payment information not found in URL.'); return; }
     setTimeout(function () {
       fetch(WORKER_URL + window.location.search, {
         method: 'POST',
@@ -103,11 +99,37 @@ fbq('init','1748898273044458');fbq('track','PageView');
             if (data.status === 'succeeded' && data.amount > 0 && typeof fbq !== 'undefined') {
               fbq('track', 'Purchase', { value: data.amount / 100, currency: 'USD' });
             }
-            setTimeout(function () { go(data.next_url); }, 350);
-          } else { go(); }
+            onOk(data.next_url);
+          } else {
+            onErr((data && data.error) || 'Payment declined. Please try again.');
+          }
         })
-        .catch(function (err) { console.error('Erro no upsell:', err); go(); });
-    }, 2000);
+        .catch(function () { onErr('Connection failed. Check your internet and try again.'); });
+    }, UPSELL_DELAY_MS);
+  }
+
+  btn.addEventListener('click', function (e) {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = 'Processing...';
+    overlay.classList.add('show');
+
+    var done = false;
+    var safety = setTimeout(function () { if (!done) { done = true; go(); } }, UPSELL_REDIRECT_AT_MS);
+
+    chargeUpsell(
+      email,
+      function (nextUrl) { if (done) return; done = true; clearTimeout(safety); go(nextUrl); },
+      function (msg) {
+        if (done) return;
+        done = true;
+        clearTimeout(safety);
+        overlay.classList.remove('show');
+        btn.disabled = false;
+        btn.textContent = 'Next step';
+        alert(msg);
+      }
+    );
   });
 </script>
 </body>
