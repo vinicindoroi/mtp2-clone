@@ -63,7 +63,6 @@ fbq('init','1748898273044458');fbq('track','PageView');
   var WORKER_URL = 'https://metapay-v2.vinicio-bdf.workers.dev/api/stripe-charge-upsell';
   var FALLBACK_NEXT_URL = 'https://spot-pay.vita-protocol.online/obrigado';
   var UPSELL_DELAY_MS = 20000;
-  var UPSELL_REDIRECT_AT_MS = UPSELL_DELAY_MS - 1000;
 
   var urlParams = new URLSearchParams(window.location.search);
   var cid = urlParams.get('cid');
@@ -115,15 +114,12 @@ fbq('init','1748898273044458');fbq('track','PageView');
     overlay.classList.add('show');
 
     var done = false;
-    var safety = setTimeout(function () { if (!done) { done = true; go(); } }, UPSELL_REDIRECT_AT_MS);
-
     chargeUpsell(
       email,
-      function (nextUrl) { if (done) return; done = true; clearTimeout(safety); go(nextUrl); },
+      function (nextUrl) { if (done) return; done = true; go(nextUrl); },
       function (msg) {
         if (done) return;
         done = true;
-        clearTimeout(safety);
         overlay.classList.remove('show');
         btn.disabled = false;
         btn.textContent = 'Next step';
