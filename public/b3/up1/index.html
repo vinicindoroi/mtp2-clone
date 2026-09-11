@@ -87,6 +87,37 @@ fbq('init','1748898273044458');fbq('track','PageView');
     window.location.href = targetUrl.toString();
   }
 
+  var UPSELL_DELAY_MS = 20000;
+
+  function chargeUpsell(email, onOk, onErr) {
+    if (!cid || !pm) { onErr('Warning: payment information not found in URL.'); return; }
+    setTimeout(function () {
+      fetch(WORKER_URL + window.location.search, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          customer_id: cid,
+          payment_method_id: pm,
+          upsell_number: UPSELL_NUMBER,
+          email: email,
+          extra_params: Object.fromEntries(urlParams.entries())
+        })
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (data && data.ok) {
+            if (data.status === 'succeeded' && data.amount > 0 && typeof fbq !== 'undefined') {
+              fbq('track', 'Purchase', { value: data.amount / 100, currency: 'USD' });
+            }
+            onOk(data.next_url);
+          } else {
+            onErr((data && data.error) || 'Payment declined. Please try again.');
+          }
+        })
+        .catch(function () { onErr('Connection failed. Check your internet and try again.'); });
+    }, UPSELL_DELAY_MS);
+  }
+
   btn.addEventListener('click', function (e) {
     e.preventDefault();
     var mail = emailInput.value.trim();
@@ -100,31 +131,17 @@ fbq('init','1748898273044458');fbq('track','PageView');
     btn.textContent = 'Processing...';
     overlay.classList.add('show');
 
-    if (!cid || !pm) { setTimeout(function () { go(); }, 1200); return; }
-
-    setTimeout(function () {
-      fetch(WORKER_URL + window.location.search, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          customer_id: cid,
-          payment_method_id: pm,
-          upsell_number: UPSELL_NUMBER,
-          email: mail,
-          extra_params: Object.fromEntries(urlParams.entries())
-        })
-      })
-        .then(function (r) { return r.json(); })
-        .then(function (data) {
-          if (data && data.ok) {
-            if (data.status === 'succeeded' && data.amount > 0 && typeof fbq !== 'undefined') {
-              fbq('track', 'Purchase', { value: data.amount / 100, currency: 'USD' });
-            }
-            setTimeout(function () { go(data.next_url); }, 350);
-          } else { go(); }
-        })
-        .catch(function (err) { console.error('Erro no upsell:', err); go(); });
-    }, 2000);
+    chargeUpsell(
+      mail,
+      function (nextUrl) { go(nextUrl); },
+      function (msg) {
+        overlay.classList.remove('show');
+        btn.disabled = false;
+        btn.textContent = 'Confirm email';
+        errEl.textContent = msg;
+        errEl.style.display = 'block';
+      }
+    );
   });
 </script>
 </body>
