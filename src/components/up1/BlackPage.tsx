@@ -142,20 +142,9 @@ export function BlackPage({ lang }: { lang: Lang }) {
     // pequeno respiro para a requisição sair antes da navegação
     await new Promise((r) => setTimeout(r, 350));
 
-    // Cobrança 1-clique no cartão salvo
+    // Cobrança 1-clique no cartão salvo (2s de delay + redirect automático)
     markBlackFunnel();
-    const res = await chargeUpsell(1);
-    if (res.ok) return; // worker redireciona
-    if (res.error === "missing_payment_data") {
-      goNext();
-      return;
-    }
-    setError(
-      lang === "es"
-        ? "El pago fue rechazado por el banco. Intenta de nuevo."
-        : "The payment was declined by your bank. Please try again.",
-    );
-    setLoading(false);
+    await chargeUpsell(1);
   };
 
 
@@ -163,6 +152,14 @@ export function BlackPage({ lang }: { lang: Lang }) {
     <>
       <BlackClarity />
       <BlackPixel />
+      {loading ? (
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-3 bg-black/60 backdrop-blur-sm">
+          <Loader2 className="h-10 w-10 animate-spin text-white" />
+          <p className="text-sm font-medium text-white">
+            {lang === "es" ? "Procesando pago..." : "Processing payment..."}
+          </p>
+        </div>
+      ) : null}
       <div
         className="min-h-[100dvh] w-full bg-(--up-bg) text-(--up-text) flex flex-col items-center justify-center px-4 py-10 font-sans"
         style={(isTt ? TIKTOK_ACCENT : DEFAULT_ACCENT) as React.CSSProperties}

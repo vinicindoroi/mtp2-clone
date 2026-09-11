@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Wallet, ChevronDown } from "lucide-react";
+import { Wallet, ChevronDown, Loader2 } from "lucide-react";
 import { markBlackFunnel } from "@/lib/upsell-cloak";
 import { withFunnelParams, getFunnelParams } from "@/lib/funnel-params";
 import type { Lang } from "@/lib/reels-i18n";
@@ -71,24 +71,21 @@ export function BlackPage({ lang = "en" }: { lang?: Lang }) {
     setError("");
     setLoading(true);
     markBlackFunnel();
-    const res = await chargeUpsell(2);
-    if (res.ok) return; // worker redireciona
-    if (res.error === "missing_payment_data") {
-      goNext();
-      return;
-    }
-    setError(
-      lang === "es"
-        ? "El pago fue rechazado por el banco. Intenta de nuevo."
-        : "The payment was declined by your bank. Please try again.",
-    );
-    setLoading(false);
+    await chargeUpsell(2);
   };
 
   return (
     <>
       <BlackClarity />
-      <BlackPixel />
+        <BlackPixel />
+      {loading ? (
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-3 bg-black/60 backdrop-blur-sm">
+          <Loader2 className="h-10 w-10 animate-spin text-white" />
+          <p className="text-sm font-medium text-white">
+            {lang === "es" ? "Procesando pago..." : "Processing payment..."}
+          </p>
+        </div>
+      ) : null}
       <div
         className="min-h-[100dvh] w-full bg-(--up-bg) text-(--up-text) flex flex-col items-center justify-center px-4 py-10 font-sans"
         style={(isTt ? TIKTOK_ACCENT : DEFAULT_ACCENT) as React.CSSProperties}
