@@ -252,6 +252,8 @@
     .support-receipt-label { color: var(--fb-muted); font-size: 11px; text-transform: uppercase; }
     .support-receipt-amount { margin-top: 3px; color: var(--fb-blue); font-size: 27px; font-weight: 800; }
     .support-receipt-line { display: flex; justify-content: space-between; gap: 12px; margin-top: 13px; padding-top: 11px; border-top: 1px solid var(--fb-line); font-size: 12px; }
+    .support-video { width: min(330px, calc(100vw - 66px)); height: 440px; overflow: hidden; border: 1px solid var(--fb-line); border-radius: 10px; background: #000; box-shadow: 0 3px 12px rgba(28,30,33,.12); }
+    .support-video iframe { width: 100%; height: 100%; border: 0; }
     .support-footer { flex: none; padding: 10px 12px max(10px, env(safe-area-inset-bottom)); background: var(--fb-surface); border-top: 1px solid var(--fb-line); }
     .support-choice { display: none; width: 100%; min-height: 48px; padding: 10px 16px; border-radius: 999px; background: var(--fb-blue); color: white; font-size: 14px; font-weight: 700; box-shadow: 0 4px 12px rgba(24,119,242,.22); }
     .support-choice.visible { display: block; animation: chatIn .3s ease both; }
@@ -670,12 +672,15 @@
     { type:"text", text:"Would you like to continue and withdraw <strong>your money?</strong>" },
     { type:"choice", label:"Yes, I want to withdraw my money" },
     { type:"wait", ms:700 },
-    { type:"text", text:"<strong>Your commission receipt is ready 👇🏻</strong>" },
+    { type:"text", text:"<strong>Your commission receipt is ready.</strong>" },
     { type:"wait", ms:650 },
     { type:"receipt" },
     { type:"wait", ms:900 },
     { type:"choice", label:"I want to claim my reward" },
     { type:"wait", ms:700 },
+    { type:"text", text:"Watch this short explanation to unlock your withdrawal." },
+    { type:"video" },
+    { type:"wait", ms:23000 },
     { type:"text", text:"To receive your <strong>$278.45 reward</strong>, complete the secure verification on the next page." },
     { type:"wait", ms:800 },
     { type:"text", text:"The verification fee is fully refunded together with your current rewards balance." },
@@ -735,6 +740,18 @@
     supportScroll();
   }
 
+  function addSupportVideo() {
+    var chat = document.getElementById("support-chat");
+    if (!chat) return;
+    supportTyping(false);
+    var row = document.createElement("div");
+    row.className = "support-row";
+    row.innerHTML = '<img class="support-mini-avatar" src="images/Yl8jFpPF17D9.png" alt="">' +
+      '<div class="support-video"><iframe title="Withdrawal instructions" allow="autoplay; fullscreen; encrypted-media" src="https://scripts.converteai.net/6f8deb32-4555-418c-abac-be553d8d8f32/players/6a861e2d89f6d869b56ee274/v4/embed.html"></iframe></div>';
+    chat.appendChild(row);
+    supportScroll();
+  }
+
   function showSupportChoice(label) {
     var button = document.getElementById("support-choice");
     supportPending = label;
@@ -759,6 +776,12 @@
     }
     if (step.type === "receipt") {
       addSupportReceipt();
+      supportIndex += 1;
+      setTimeout(runSupportStep, 200);
+      return;
+    }
+    if (step.type === "video") {
+      addSupportVideo();
       supportIndex += 1;
       setTimeout(runSupportStep, 200);
       return;
