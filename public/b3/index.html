@@ -251,6 +251,7 @@
     .support-video iframe { width: 100%; height: 100%; border: 0; }
     .support-image { display: block; width: min(290px, calc(100vw - 76px)); height: auto; border: 1px solid rgba(0,0,0,.05); border-radius: 16px; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
     .support-footer { flex: none; padding: 10px 12px max(10px, env(safe-area-inset-bottom)); background: var(--fb-surface); border-top: 1px solid var(--fb-line); }
+    .support-footer:not(:has(.support-choice.visible)) { display: none; }
     .support-choice { display: none; width: 100%; min-height: 48px; padding: 10px 16px; border-radius: 999px; background: var(--fb-blue); color: white; font-size: 14px; font-weight: 700; box-shadow: 0 4px 12px rgba(24,119,242,.22); }
     .support-choice.visible { display: block; animation: chatIn .3s ease both; }
     .support-note { margin-top: 7px; color: var(--fb-muted); font-size: 10px; text-align: center; }
