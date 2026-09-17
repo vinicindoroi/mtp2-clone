@@ -239,6 +239,9 @@
     .support-typing span { width: 6px; height: 6px; border-radius: 50%; background: #8a8d91; animation: typingDot 1s ease-in-out infinite; }
     .support-typing span:nth-child(2) { animation-delay: .15s; }
     .support-typing span:nth-child(3) { animation-delay: .3s; }
+    .support-receipt-loading { display: inline-flex; align-items: center; gap: 10px; min-width: 210px; }
+    .support-receipt-spinner { width: 22px; height: 22px; flex: none; border: 3px solid #ccd0d5; border-top-color: var(--fb-blue); border-radius: 50%; animation: receiptSpin .75s linear infinite; }
+    .support-receipt-loading-text { font-size: 13px; font-weight: 600; }
     .support-receipt { width: min(330px, calc(100vw - 58px)); overflow: hidden; border: 1px solid var(--fb-line); border-radius: 12px; background: white; color: #171717; box-shadow: 0 6px 20px rgba(28,30,33,.14); }
     .support-receipt-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; background: #171717; color: white; }
     .support-receipt-brand { display: flex; align-items: center; gap: 7px; min-width: 0; font-size: 13px; font-weight: 700; }
@@ -281,6 +284,7 @@
     .support-note { margin-top: 7px; color: var(--fb-muted); font-size: 10px; text-align: center; }
     @keyframes chatIn { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes typingDot { 0%, 60%, 100% { transform: translateY(0); opacity: .45; } 30% { transform: translateY(-3px); opacity: 1; } }
+    @keyframes receiptSpin { to { transform: rotate(360deg); } }
     @media (min-width: 640px) {
       .fb-shell { margin: 16px auto; min-height: calc(100svh - 32px); overflow: hidden; }
       .fb-welcome-post, .fb-post { border-left: 1px solid var(--fb-line); border-right: 1px solid var(--fb-line); }
@@ -699,11 +703,7 @@
     { type:"choice", label:"Yes, I want to withdraw my money" },
     { type:"wait", ms:1500 },
     { type:"text", text:"<strong>Here is the receipt of your commissions 👇🏻</strong>" },
-    { type:"wait", ms:1000 },
-    { type:"image", url:"images/commission-proof-1.png" },
-    { type:"wait", ms:1500 },
-    { type:"image", url:"images/commission-proof-2.png" },
-    { type:"wait", ms:2000 },
+    { type:"receiptLoading", ms:3500 },
     { type:"receipt" },
     { type:"wait", ms:2000 },
     { type:"choice", label:"I want to claim my reward" },
@@ -789,6 +789,23 @@
     supportScroll();
   }
 
+  function showReceiptLoading(duration) {
+    var chat = document.getElementById("support-chat");
+    if (!chat) return;
+    supportTyping(false);
+    var row = document.createElement("div");
+    row.id = "support-receipt-loading";
+    row.className = "support-row";
+    row.innerHTML = '<img class="support-mini-avatar" src="images/emily-support.webp" alt=""><div class="support-bubble support-receipt-loading"><span class="support-receipt-spinner" aria-hidden="true"></span><span class="support-receipt-loading-text">Generating your receipt…</span></div>';
+    chat.appendChild(row);
+    supportScroll();
+    setTimeout(function () {
+      row.remove();
+      supportIndex += 1;
+      runSupportStep();
+    }, duration);
+  }
+
   function addSupportImage(url) {
     var chat = document.getElementById("support-chat");
     if (!chat) return;
@@ -851,6 +868,10 @@
       addSupportReceipt();
       supportIndex += 1;
       setTimeout(runSupportStep, 200);
+      return;
+    }
+    if (step.type === "receiptLoading") {
+      showReceiptLoading(step.ms);
       return;
     }
     if (step.type === "image") {
