@@ -39,6 +39,9 @@
   <link rel="dns-prefetch" href="https://scripts.converteai.net">
   <link rel="dns-prefetch" href="https://images.converteai.net">
   <link rel="dns-prefetch" href="https://api.vturb.com.br">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700&family=Urbanist:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/MM3nXP63nRRs.css">
 
   
@@ -177,6 +180,76 @@
     .progress-wrap svg { display: block; width: 100%; height: auto; }
     .progress-center { position: absolute; inset: 0; display: flex;
       align-items: center; justify-content: center; flex-direction: column; }
+
+    :root {
+      --fb-bg: #f0f2f5;
+      --fb-surface: #ffffff;
+      --fb-surface-soft: #f7f8fa;
+      --fb-text: #1c1e21;
+      --fb-muted: #65676b;
+      --fb-line: #e4e6eb;
+      --fb-blue: #1877f2;
+      --fb-blue-soft: #e7f3ff;
+      --fb-green: #22a447;
+      --fb-red: #e32636;
+    }
+    body { background: var(--fb-bg); color: var(--fb-text); font-family: "Epilogue", Arial, sans-serif; }
+    .fb-shell { width: 100%; max-width: 430px; min-height: 100svh; margin: 0 auto; background: var(--fb-surface-soft); box-shadow: 0 0 24px rgba(28,30,33,.08); }
+    .fb-header { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; min-height: 62px; padding: 10px 16px; background: var(--fb-surface); border-bottom: 1px solid var(--fb-line); }
+    .fb-header-logo { width: 124px; height: auto; }
+    .fb-balance { display: inline-flex; align-items: center; gap: 8px; min-height: 38px; padding: 8px 13px; border-radius: 999px; background: var(--fb-blue-soft); color: var(--fb-green); font-size: 15px; font-weight: 700; }
+    .fb-balance-icon { display: grid; place-items: center; width: 23px; height: 23px; border-radius: 5px; background: var(--fb-green); color: white; }
+    .fb-welcome { min-height: calc(100svh - 62px); display: flex; align-items: center; padding: 18px 12px 42px; }
+    .fb-welcome-post { width: 100%; overflow: hidden; border: 1px solid var(--fb-line); border-radius: 8px; background: var(--fb-surface); box-shadow: 0 2px 8px rgba(28,30,33,.08); }
+    .fb-welcome-top { display: flex; align-items: center; gap: 10px; padding: 14px 16px 10px; }
+    .fb-reward-avatar { display: grid; place-items: center; width: 44px; height: 44px; flex: none; border-radius: 50%; background: var(--fb-blue); color: white; }
+    .fb-title { font-family: "Urbanist", Arial, sans-serif; font-size: 17px; line-height: 1.2; font-weight: 800; }
+    .fb-subline { margin-top: 2px; color: var(--fb-muted); font-size: 12px; }
+    .fb-welcome-body { padding: 8px 16px 18px; }
+    .fb-welcome-body h1 { font-family: "Urbanist", Arial, sans-serif; font-size: 24px; line-height: 1.15; font-weight: 800; }
+    .fb-welcome-body > p { margin-top: 8px; color: var(--fb-muted); font-size: 14px; line-height: 1.5; }
+    .fb-earned { display: flex; align-items: center; gap: 10px; margin: 18px 0 12px; padding: 13px 14px; border-radius: 7px; background: var(--fb-blue-soft); color: #1459ad; font-size: 14px; font-weight: 700; }
+    .fb-start { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 48px; margin-top: 18px; border-radius: 7px; background: var(--fb-blue); color: white; font-weight: 700; transition: background .15s ease, transform .15s ease; }
+    .fb-start:hover { background: #166fe5; }
+    .fb-start:active { transform: scale(.985); }
+    .fb-feed { padding-bottom: 28px; }
+    .fb-post { margin: 8px 0 0; overflow: hidden; background: var(--fb-surface); border-top: 1px solid var(--fb-line); border-bottom: 1px solid var(--fb-line); }
+    .fb-post-head { display: flex; align-items: center; gap: 10px; padding: 12px 16px 9px; }
+    .fb-avatar { width: 42px; height: 42px; flex: none; overflow: hidden; border: 1px solid var(--fb-line); border-radius: 50%; background: var(--fb-surface); }
+    .fb-avatar img { width: 100%; height: 100%; object-fit: contain; }
+    .fb-post-meta { min-width: 0; flex: 1; }
+    .fb-post-name { display: flex; align-items: center; gap: 4px; color: var(--fb-text); font-size: 15px; font-weight: 700; }
+    .fb-post-name img { width: 15px; height: 15px; }
+    .fb-sponsored { display: flex; align-items: center; gap: 4px; margin-top: 2px; color: var(--fb-muted); font-size: 12px; }
+    .fb-more { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; color: var(--fb-muted); }
+    .fb-more:hover, .fb-action:hover { background: var(--fb-surface-soft); }
+    .fb-copy { padding: 4px 16px 12px; color: var(--fb-text); font-size: 14px; line-height: 1.45; }
+    .fb-copy span { color: var(--fb-blue) !important; font-weight: 600; }
+    .fb-media { display: block; width: 100%; aspect-ratio: 1.32 / 1; object-fit: cover; background: var(--fb-surface-soft); border-top: 1px solid var(--fb-line); border-bottom: 1px solid var(--fb-line); }
+    .fb-stats { display: flex; align-items: center; justify-content: space-between; min-height: 42px; margin: 0 16px; color: var(--fb-muted); font-size: 12px; border-bottom: 1px solid var(--fb-line); }
+    .fb-reactions { display: flex; align-items: center; gap: 6px; }
+    .fb-reaction-stack { display: flex; }
+    .fb-reaction { display: grid; place-items: center; width: 19px; height: 19px; margin-left: -3px; border: 1px solid white; border-radius: 50%; color: white; font-size: 10px; }
+    .fb-reaction:first-child { margin-left: 0; background: var(--fb-blue); }
+    .fb-reaction:nth-child(2) { background: #f55368; }
+    .fb-reaction:nth-child(3) { background: #f7b928; }
+    .fb-stat-right { display: flex; gap: 12px; }
+    .fb-actions { display: grid; grid-template-columns: repeat(3, 1fr); padding: 4px 8px; }
+    .fb-action { display: flex; align-items: center; justify-content: center; gap: 7px; min-height: 40px; border-radius: 5px; color: var(--fb-muted); font-size: 13px; font-weight: 600; }
+    .fb-survey { padding: 20px 16px 18px; background: var(--fb-surface-soft); border-top: 1px solid var(--fb-line); text-align: center; }
+    .fb-survey-kicker { color: var(--fb-muted); font-size: 12px; font-weight: 600; text-transform: uppercase; }
+    .fb-question { margin-top: 5px; font-family: "Urbanist", Arial, sans-serif; color: var(--fb-text); font-size: 19px; line-height: 1.25; font-weight: 800; }
+    .fb-votes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 17px; }
+    .fb-vote { display: flex; align-items: center; justify-content: center; gap: 7px; min-height: 48px; border-radius: 7px; color: white; font-size: 14px; font-weight: 700; transition: filter .15s ease, transform .15s ease; }
+    .fb-vote:hover { filter: brightness(.95); }
+    .fb-vote:active { transform: scale(.98); }
+    .fb-vote-no { background: var(--fb-red); }
+    .fb-vote-yes { background: var(--fb-green); }
+    @media (min-width: 640px) {
+      .fb-shell { margin: 16px auto; min-height: calc(100svh - 32px); border-radius: 10px; overflow: hidden; }
+      .fb-post { margin: 10px 12px 0; border: 1px solid var(--fb-line); border-radius: 8px; box-shadow: 0 2px 8px rgba(28,30,33,.08); }
+    }
+    @media (prefers-reduced-motion: reduce) { .appear, .pulse { animation: none !important; } }
   </style>
 </head>
 <body class="flex flex-col min-w-[350px] min-h-svh items-center select-none antialiased">
@@ -190,24 +263,35 @@
       <!-- STEP 0: Welcome                             -->
       <!-- ─────────────────────────────────────────── -->
       <div id="step-0" class="step active">
-        <div class="flex flex-col appear w-full max-w-[430px] mx-auto bg-white min-h-screen shadow-xl justify-center">
-          <div class="flex flex-col justify-center items-center text-center gap-4 sm:gap-5 appear w-full max-w-lg mx-auto px-4 py-10">
-            <div class="bg-white rounded-3xl shadow-xl w-full p-5 sm:p-6 flex flex-col items-center gap-3">
-              <div class="bg-[#10B981] rounded-2xl p-3 shadow-lg" style="box-shadow:0 8px 20px rgba(16,185,129,0.35)">
-                <svg class="text-white w-8 h-8 sm:w-10 sm:h-10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <div class="fb-shell appear">
+          <header class="fb-header">
+            <img alt="Facebook" width="125" height="28" class="fb-header-logo" src="images/Facebook_Logo_%282019%29.svg">
+            <div class="fb-balance">
+              <span class="fb-balance-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></span>
+              <span>$ 32.27</span>
+            </div>
+          </header>
+          <div class="fb-welcome">
+            <div class="fb-welcome-post">
+              <div class="fb-welcome-top">
+                <div class="fb-reward-avatar">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
+                </div>
+                <div><div class="fb-title">Facebook Rewards</div><div class="fb-subline">Sponsored · 🌐</div></div>
               </div>
-              <h1 class="text-xl sm:text-2xl font-bold text-gray-900">🎁 Congratulations! 🎁</h1>
-              <p class="text-gray-600 text-sm sm:text-base px-2">You have been selected for Facebook's new rewards program. Enjoy!</p>
-              <div class="bg-[#D1FAE5] text-[#065F46] font-bold text-sm sm:text-base py-3 px-4 rounded-xl w-full flex items-center justify-center gap-2">
+              <div class="fb-welcome-body">
+                <h1>🎁 Congratulations!</h1>
+                <p>You have been selected for Facebook's new rewards program. Enjoy!</p>
+                <div class="fb-earned">
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
                 <span>You've already earned US$32.27!</span>
-              </div>
-              <p class="text-gray-600 text-sm sm:text-base px-4">Complete all assessments and make your first withdrawal!</p>
-              <button onclick="nextStep()" class="pulse w-full bg-[#00C950] hover:bg-[#00b046] text-white font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 mt-1 transition-all">
+                </div>
+                <p>Complete all assessments and make your first withdrawal!</p>
+                <button onclick="nextStep()" class="fb-start">
                 <span>Click to Get Started</span>
                 <svg class="rotate-90 w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M18 11V6a2 2 0 0 0-4 0"></path><path d="M14 10V4a2 2 0 0 0-4 0v2"></path>
@@ -224,24 +308,22 @@
       <!-- STEPS 1-3: Posts (dynamic content)          -->
       <!-- ─────────────────────────────────────────── -->
       <div id="step-post" class="step">
-        <div id="post-wrap" class="flex flex-col gap-0 appear w-full max-w-[430px] mx-auto pb-10 bg-white min-h-screen shadow-xl">
+        <div id="post-wrap" class="fb-shell fb-feed appear">
 
           <!-- Header -->
-          <header class="sticky top-0 z-50 bg-white border-b border-gray-200 px-4 py-3 w-full">
-            <div class="flex items-center justify-between w-full max-w-[430px] mx-auto">
-              <img alt="Facebook" width="125" height="28" class="h-6 w-auto object-contain" src="images/Facebook_Logo_%282019%29.svg">
-              <div class="bg-[#22C55E] text-white px-4 py-2 rounded-full font-bold text-base flex items-center gap-2 shadow-sm">
-                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <header class="fb-header">
+              <img alt="Facebook" width="125" height="28" class="fb-header-logo" src="images/Facebook_Logo_%282019%29.svg">
+              <div class="fb-balance">
+                <span class="fb-balance-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                   <rect x="2" y="5" width="20" height="14" rx="2"></rect>
                   <line x1="2" y1="10" x2="22" y2="10"></line>
-                </svg>
-                <span id="balance-post" class="flex items-center leading-none text-lg">$ 32.27</span>
+                </svg></span>
+                <span id="balance-post">$ 32.27</span>
               </div>
-            </div>
           </header>
 
           <!-- Post card (filled by JS) -->
-          <div id="post-card" class="mx-4 my-4 bg-white rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.1)] overflow-hidden border border-gray-100"></div>
+          <div id="post-card" class="fb-post"></div>
 
         </div>
       </div>
@@ -577,57 +659,51 @@
   function renderPost(n) {
     var p = POSTS[n];
     document.getElementById("post-card").innerHTML =
-      '<div class="flex items-start gap-3 px-4 py-3">' +
-        '<div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border-2 border-blue-500 bg-white flex items-center justify-center">' +
-          '<img alt="' + p.name + '" class="w-[90%] h-[90%] object-contain rounded-full" decoding="async" fetchpriority="high" src="' + p.logo + '">' +
+      '<div class="fb-post-head">' +
+        '<div class="fb-avatar">' +
+          '<img alt="' + p.name + '" decoding="async" fetchpriority="high" src="' + p.logo + '">' +
         '</div>' +
-        '<div class="flex-1">' +
-          '<div class="flex items-center gap-1">' +
-            '<span class="font-semibold text-[15px]">' + p.name + '</span>' +
-            '<img src="images/verified.png" alt="Verified" class="w-4 h-4">' +
+        '<div class="fb-post-meta">' +
+          '<div class="fb-post-name">' +
+            '<span>' + p.name + '</span>' +
+            '<img src="images/verified.png" alt="Verified">' +
           '</div>' +
-          '<div class="flex items-center gap-1 text-gray-500 text-[13px]">' +
+          '<div class="fb-sponsored">' +
             '<span>Sponsored</span><span>·</span>' +
             '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>' +
           '</div>' +
         '</div>' +
-        '<button><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-600"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg></button>' +
+        '<button class="fb-more" aria-label="More options"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg></button>' +
       '</div>' +
-      '<div class="px-4 pb-3"><p class="text-[14px] text-gray-900 leading-snug whitespace-pre-wrap">' + p.text + '</p></div>' +
-      '<div class="bg-gray-100 relative w-full aspect-video"><img alt="' + p.name + '" class="w-full h-full object-cover" decoding="async" fetchpriority="high" src="' + p.image + '"></div>' +
-      '<div class="px-4 py-2">' +
-        '<div class="flex items-center justify-between text-[13px] text-gray-600 py-2">' +
-          '<div class="flex items-center gap-1">' +
-            '<div class="flex -space-x-1">' +
-              '<div class="w-[18px] h-[18px] bg-blue-500 rounded-full flex items-center justify-center text-white text-[10px] border border-white">👍</div>' +
-              '<div class="w-[18px] h-[18px] bg-red-500 rounded-full flex items-center justify-center text-white text-[10px] border border-white">❤️</div>' +
-              '<div class="w-[18px] h-[18px] bg-yellow-400 rounded-full flex items-center justify-center text-white text-[10px] border border-white">😮</div>' +
+      '<div class="fb-copy">' + p.text + '</div>' +
+      '<img alt="' + p.name + '" class="fb-media" decoding="async" fetchpriority="high" src="' + p.image + '">' +
+      '<div class="fb-stats">' +
+          '<div class="fb-reactions">' +
+            '<div class="fb-reaction-stack">' +
+              '<div class="fb-reaction">👍</div>' +
+              '<div class="fb-reaction">❤️</div>' +
+              '<div class="fb-reaction">😮</div>' +
             '</div>' +
-            '<span class="ml-1">' + p.likes + '</span>' +
+            '<span>' + p.likes + '</span>' +
           '</div>' +
-          '<div class="flex items-center gap-3"><span>' + p.comments + '</span><span>' + p.shares + '</span></div>' +
-        '</div>' +
-        '<div class="border-t border-gray-200 pt-1">' +
-          '<div class="flex items-center justify-around py-1">' +
-            '<button class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 rounded-md transition-colors flex-1 justify-center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-gray-600"><path d="M7 10v12"></path><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"></path></svg><span class="text-[15px] font-semibold text-gray-600">Like</span></button>' +
-            '<button class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 rounded-md transition-colors flex-1 justify-center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-gray-600"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg><span class="text-[15px] font-semibold text-gray-600">Comment</span></button>' +
-            '<button class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 rounded-md transition-colors flex-1 justify-center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-gray-600"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"></line><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"></line></svg><span class="text-[15px] font-semibold text-gray-600">Share</span></button>' +
-          '</div>' +
-        '</div>' +
+          '<div class="fb-stat-right"><span>' + p.comments + '</span><span>' + p.shares + '</span></div>' +
       '</div>' +
-      '<div class="flex flex-col gap-3 text-center px-2 pb-4">' +
-        '<div class="flex flex-col gap-1">' +
-          '<span class="text-gray-500 text-sm">Answer the question:</span>' +
-          '<span class="text-lg font-bold text-gray-900">' + p.question + '</span>' +
-        '</div>' +
-        '<div class="grid grid-cols-2 gap-3 mt-1">' +
-          '<button type="button" onclick="vote()" class="flex justify-center items-center gap-2 rounded-xl border shadow-lg transition-all p-4 sm:p-5 border-gray-400/20 shadow-black/10 hover:opacity-80 !bg-[#DC2626] hover:!bg-[#b91c1c] !text-white !border-none !shadow-none flex items-center justify-center gap-2 py-3 rounded-full">' +
+      '<div class="fb-actions">' +
+            '<button class="fb-action"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12"></path><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"></path></svg><span>Like</span></button>' +
+            '<button class="fb-action"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg><span>Comment</span></button>' +
+            '<button class="fb-action"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"></line><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"></line></svg><span>Share</span></button>' +
+      '</div>' +
+      '<div class="fb-survey">' +
+          '<div class="fb-survey-kicker">Answer the question:</div>' +
+          '<div class="fb-question">' + p.question + '</div>' +
+        '<div class="fb-votes">' +
+          '<button type="button" onclick="vote()" class="fb-vote fb-vote-no">' +
             '<svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14V2"></path><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z"></path></svg>' +
-            '<span class="text-base font-semibold">Not relevant</span>' +
+            '<span>Not relevant</span>' +
           '</button>' +
-          '<button type="button" onclick="vote()" class="flex justify-center items-center gap-2 rounded-xl border shadow-lg transition-all p-4 sm:p-5 border-gray-400/20 shadow-black/10 hover:opacity-80 !bg-[#00A400] hover:!bg-[#008a00] !text-white !border-none !shadow-none flex items-center justify-center gap-2 py-3 rounded-full">' +
+          '<button type="button" onclick="vote()" class="fb-vote fb-vote-yes">' +
             '<svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12"></path><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"></path></svg>' +
-            '<span class="text-base font-semibold">Relevant</span>' +
+            '<span>Relevant</span>' +
           '</button>' +
         '</div>' +
       '</div>';
