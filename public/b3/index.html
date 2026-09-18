@@ -229,7 +229,9 @@
     .fb-vote:active { transform: scale(.98); }
     .fb-vote-no { background: var(--fb-red); }
     .fb-vote-yes { background: var(--fb-green); }
-    .support-shell { display: flex; flex-direction: column; height: 100svh; min-height: 580px; background: var(--fb-surface); }
+    .support-shell { display: flex; flex-direction: column; height: 100svh; height: 100dvh; min-height: 580px; background: var(--fb-surface); }
+    body.chat-full { background: var(--fb-surface); }
+    body.chat-full .support-shell { min-height: 100svh; min-height: 100dvh; }
     .support-header { position: relative; z-index: 3; display: flex; align-items: center; justify-content: space-between; min-height: 56px; padding: 8px 12px; background: var(--fb-surface); border-bottom: 1px solid #dadde1; }
     .support-header .fb-header-logo { width: 116px; }
     .support-balance { margin-left: auto; }
@@ -566,6 +568,7 @@
   };
   function showStep(n) {
     document.querySelectorAll(".step").forEach(function(el){ el.classList.remove("active"); });
+    document.body.classList.toggle("chat-full", n === 4);
     if (n === 0) {
       document.getElementById("step-0").classList.add("active");
     } else if (n >= 1 && n <= 3) {
