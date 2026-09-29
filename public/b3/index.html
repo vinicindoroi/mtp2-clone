@@ -349,9 +349,9 @@
         margin: 0;
         box-shadow: none;
       }
-      body.chat-full .support-header { min-height: 54px; padding: 0 12px; background: rgba(0,0,0,.88); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-      body.chat-full .support-wrapper { padding: 10px 10px calc(10px + env(safe-area-inset-bottom)); background: linear-gradient(180deg, #0d213f 0%, #0d0d0d 42%, #080808 100%); }
-      body.chat-full .support-card { border-radius: 14px; box-shadow: 0 4px 24px rgba(0,0,0,.7), 0 0 0 1px rgba(24,119,242,.15); }
+      body.chat-full .support-header { min-height: 54px; padding: 0 12px; background: var(--fb-surface); }
+      body.chat-full .support-wrapper { padding: 10px 10px calc(10px + env(safe-area-inset-bottom)); background: transparent; }
+      body.chat-full .support-card { border-radius: 14px; box-shadow: 0 4px 24px rgba(28,30,33,.10), 0 0 0 1px rgba(24,119,242,.10); }
       body.chat-full .support-chat { min-height: 0; overscroll-behavior: contain; }
     }
     @media (prefers-reduced-motion: reduce) { .appear, .pulse { animation: none !important; } }
