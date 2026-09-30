@@ -236,11 +236,6 @@
     .support-header .fb-header-logo { width: 118px; height: auto; }
     .support-balance { margin-left: auto; }
     .support-chat { display: flex; flex: 1; min-height: 0; flex-direction: column; gap: 11px; overflow-y: auto; padding: 14px 14px 18px; background: transparent; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
-    .support-nav { display: flex; flex: none; align-items: stretch; background: var(--fb-surface); border-top: 1px solid var(--fb-line); padding: 6px 10px max(6px, env(safe-area-inset-bottom)); }
-    .support-nav-item { flex: 1; display: flex; min-width: 0; flex-direction: column; align-items: center; gap: 3px; color: var(--fb-muted); font-size: 11px; font-weight: 600; }
-    .support-nav-item svg { width: 22px; height: 22px; }
-    .support-nav-item.active { color: var(--fb-blue); }
-    .support-nav-item.active svg { color: var(--fb-blue); }
     .support-row { display: flex; align-items: flex-end; gap: 8px; max-width: 100%; animation: chatIn .34s cubic-bezier(.2,.8,.2,1) both; }
     .support-row.user { justify-content: flex-end; }
     .support-mini-avatar { width: 30px; height: 30px; flex: none; border-radius: 50%; object-fit: cover; background: var(--fb-bg); }
@@ -449,20 +444,6 @@
               <button class="support-send" type="submit" aria-label="Send">➤</button>
             </form>
           </footer>
-          <nav class="support-nav">
-            <span class="support-nav-item active">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
-              Wallet
-            </span>
-            <span class="support-nav-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>
-              Home
-            </span>
-            <span class="support-nav-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 5-5.5 8-5.5s6.5 1.5 8 5.5"/></svg>
-              Profile
-            </span>
-          </nav>
         </div>
       </div>
     </div>
