@@ -1020,6 +1020,24 @@
     if (chat) chat.scrollTop = chat.scrollHeight;
   }
 
+  function scrollChatToCenterElement(el) {
+    var chat = document.getElementById("support-chat");
+    if (!chat || !el) return;
+    try {
+      var chatRect = chat.getBoundingClientRect();
+      var elRect = el.getBoundingClientRect();
+      var targetScrollTop = chat.scrollTop + (elRect.top - chatRect.top) - (chat.clientHeight / 2) + (elRect.height / 2);
+      chat.scrollTo({
+        top: Math.max(0, targetScrollTop),
+        behavior: "smooth"
+      });
+    } catch(e) {
+      if (el && el.scrollIntoView) {
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+  }
+
   function supportTyping(show) {
     var chat = document.getElementById("support-chat");
     var old = document.getElementById("support-typing");
@@ -1644,7 +1662,16 @@
 
     chat.appendChild(marker);
     applyTwemoji(row);
-    supportScroll();
+
+    // Rola para centralizar o vídeo (e não os comentários abaixo dele)
+    var videoWrap = row.querySelector(".chat-fb-video-wrap") || row.querySelector("#ifr_" + playerId + "_wrapper") || row;
+    scrollChatToCenterElement(videoWrap);
+    setTimeout(function() {
+      scrollChatToCenterElement(videoWrap);
+    }, 150);
+    setTimeout(function() {
+      scrollChatToCenterElement(videoWrap);
+    }, 450);
 
     // Inicia os tickers dinâmicos durante o vídeo
     if (postLikesTicker) clearTimeout(postLikesTicker);
